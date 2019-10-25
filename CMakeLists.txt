@@ -7,6 +7,11 @@ include_directories(.)
 include_directories(libft)
 
 add_executable(lem_in
+		libft/avlt.c
+		libft/avlt.h
+		libft/avlt_balance.c
+		libft/avlt_del.c
+		libft/avlt_tranc.c
 		libft/ft_abs.c
 		libft/ft_atoi.c
 		libft/ft_bzero.c
