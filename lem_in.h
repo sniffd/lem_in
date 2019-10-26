@@ -19,4 +19,8 @@ typedef struct	s_room
 	struct	s_rlist	*lst;
 }				t_room;
 
+t_room			*get_v(t_avlt *tr, char *name);
+int				ft_bfs(t_avlt *graph, char *start, char *end);
+void			*q_input(void *it);
+
 #endif
