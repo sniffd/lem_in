@@ -5,6 +5,7 @@
 
 struct	s_rlist
 {
+	char			*name;
 	struct	s_rlist	*first;
 	struct	s_rlist	*last;
 	struct	s_rlist	*current;
@@ -14,6 +15,7 @@ struct	s_rlist
 typedef struct	s_room
 {
 	char			*name;
+	int 			mark;
 	int				x;
 	int				y;
 	struct	s_rlist	*lst;
