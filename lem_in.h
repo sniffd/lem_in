@@ -14,6 +14,8 @@ struct	s_rlist
 typedef struct	s_room
 {
 	char			*name;
+	int				x;
+	int				y;
 	struct	s_rlist	*lst;
 }				t_room;
 
