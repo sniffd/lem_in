@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/26 19:16:24 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/26 20:34:31 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_bfs(t_avlt *graph, char *start, char *end)
 	{
 		while(((t_room*)qhead->item)->lst)
 		{
-			w = get_v(((t_room*)qhead->item)->lst->name);
+			w = get_v(graph, ((t_room*)qhead->item)->lst->name);
 			if (w == -1)
 			{
 				w->mark = ((t_room*)qhead->item)->mark + 1;
