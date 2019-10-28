@@ -31,8 +31,10 @@ typedef struct	s_room
 t_room			*init_room(int id, char *name, int x, int y);
 t_rlist			*init_rlist(int id);
 void			*q_input(void *it);
-int				ft_bfs_int(t_room **graph, int start, int end);
-int				edm_karp_alg(t_room **graph, int start, int end);
+int				ft_bfs_int(t_room **graph, int start, int end, size_t s);
+t_list			*edm_karp_alg(t_room **graph, int start, int end, size_t s);
 void			ek_alg_mk_twin(t_room *room, int start);
+t_list			*ek_alg_mk_path(t_room *parent,  t_list *lst);
+t_list			*ek_alg_mk_path_l(t_list *path_l, t_list *path, int length);
 
 #endif

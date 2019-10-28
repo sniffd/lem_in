@@ -9,7 +9,7 @@ DG_CC_FLAGS= -g -O0
 #
 
 CC= gcc
-CC_FLAGS= -Wall -Wextra -Werror
+CC_FLAGS= -Wall -Wextra -Werror #-Wno-unused-parameter -Wno-unused-function
 
 #
 #	Checker release variables
@@ -37,7 +37,7 @@ debug: CC_FLAGS += $(DG_CC_FLAGS)
 debug: $(NAME)
 
 #
-#	Release checker
+#	Release
 #
 
 $(NAME): $(LIB) $(OBJS)
