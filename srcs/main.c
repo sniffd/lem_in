@@ -6,15 +6,15 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:09:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 13:11:42 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/28 21:49:02 by fdaryn-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
+#include <stdio.h>
 
 int		main()
 {
+	parse();
 	return 0;
 }

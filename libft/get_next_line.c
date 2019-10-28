@@ -6,13 +6,12 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 13:45:41 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/12 22:39:04 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:47:46 by fdaryn-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "libftprintf.h"
 #include "get_next_line.h"
 
 static void		del_item(t_list **head, int fd)

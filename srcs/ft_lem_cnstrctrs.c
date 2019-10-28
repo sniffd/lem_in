@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 15:17:03 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/28 21:22:05 by fdaryn-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ t_rlist	*init_rlist(int id)
 	adj->twin = NULL;
 	adj->next = NULL;
 	return (adj);
+}
+
+void	*ins(void *ins)
+{
+	return (ins);
+}
+
+int		cmp(void *p1, void *p2)
+{
+	return (ft_strcmp(p1, p2));
 }

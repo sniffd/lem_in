@@ -1,12 +1,14 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 project(lem_in C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(.)
+include_directories(includes)
 include_directories(libft)
 
 add_executable(lem_in
+		includes/ft_queue.h
+		includes/lem_in.h
 		libft/avlt.c
 		libft/avlt.h
 		libft/avlt_balance.c
@@ -89,6 +91,15 @@ add_executable(lem_in
 		libft/ft_swap.c
 		libft/ft_tolower.c
 		libft/ft_toupper.c
+		libft/get_next_line.c
+		libft/get_next_line.h
 		libft/libft.h
-		lem_in.h
-		main.c)
+		srcs/avlt_services.c
+		srcs/edm_karp_alg.c
+		srcs/edm_karp_mk_twin.c
+		srcs/ft_bfs.c
+		srcs/ft_lem_cnstrctrs.c
+		srcs/ft_queue.c
+		srcs/main.c
+		srcs/qnode_services.c
+		tests/test_que.c srcs/parse.c)

@@ -1,6 +1,7 @@
 #ifndef LEM_IN_LEM_IN_H
 # define LEM_IN_LEM_IN_H
 # include "libft.h"
+# include "get_next_line.h"
 # include "avlt.h"
 
 typedef struct	s_rlist
@@ -30,6 +31,9 @@ typedef struct	s_room
 // int				ft_bfs(t_avlt *graph, char *start, char *end);
 t_room			*init_room(int id, char *name, int x, int y);
 t_rlist			*init_rlist(int id);
+void			*ins(void *ins);
+int				*parse();
+int				cmp(void *p1, void *p2);
 void			*q_input(void *it);
 int				ft_bfs_int(t_room **graph, int start, int end);
 int				edm_karp_alg(t_room **graph, int start, int end);
