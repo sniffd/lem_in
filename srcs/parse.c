@@ -1,5 +1,5 @@
-#include "lem_in.h"
 #include <stdio.h>
+#include "lem_in.h"
 
 static int	pres(char **str, int *f)
 {
@@ -92,4 +92,5 @@ int			*parse()
 		id++;
 	}
 	printf("all\n");
+	return (0);   // value up to u
 }

@@ -6,13 +6,13 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:22:05 by fdaryn-h         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:12:23 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_room	*init_room(int id, char *name, int x, int y)
+t_room		*init_room(int id, char *name, int x, int y)
 {
 	t_room	*room;
 
@@ -27,7 +27,7 @@ t_room	*init_room(int id, char *name, int x, int y)
 	return (room);
 }
 
-t_rlist	*init_rlist(int id)
+t_rlist		*init_rlist(int id)
 {
 	t_rlist	*adj;
 
@@ -40,12 +40,28 @@ t_rlist	*init_rlist(int id)
 	return (adj);
 }
 
-void	*ins(void *ins)
+t_path_agr	*init_path_agr(int l, int n, int k)
 {
-	return (ins);
+	t_path_agr		*pathagr;
+
+	pathagr = (t_path_agr*)malloc(sizeof(t_path_agr));
+	pathagr->pths = k;
+	pathagr->L = l;
+	pathagr->ants = n;
+	pathagr->dx = 2147483647;
+	pathagr->path_l = NULL;
+	return (pathagr);
 }
 
-int		cmp(void *p1, void *p2)
+t_ek_info	*init_ek_info(t_room **graph, int end, int cntr)
 {
-	return (ft_strcmp(p1, p2));
+	t_ek_info		*box;
+
+	box = (t_ek_info*)malloc(sizeof(t_ek_info));
+	box->cur = end;
+	box->par = graph[graph[end]->parent];
+	box->path = ft_lstnew(NULL, 0);
+	box->path->content = graph[end];
+	box->i = cntr;
+	return (box);
 }

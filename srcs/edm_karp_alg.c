@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:01:00 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:30:09 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,37 +65,31 @@ static t_room		*next_parant(t_room **graph, t_room *par, int *cur)
 	return (graph[graph[*cur]->parent]);
 }
 
-t_list				*edm_karp_alg(t_room **graph, int start, int end, size_t s)
+t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t ants)
 {
-	t_room		*par;
-	t_list		*path;
-	t_list		*path_l;
-	int			cur;
-	int			i;
+	t_ek_info	*box;
+	t_path_agr	*pthagr;
 
-	path_l = NULL;
-	while(1)
+	pthagr = init_path_agr(0, ants, 0);
+	while(pthagr->dx > 0)
 	{
 		ft_bfs_int(graph, start, end, s);
 		if (graph[end]->parent == -1)
 			break;
-		cur = end;
-		par = graph[graph[end]->parent];
-		path = ft_lstnew(NULL, 0);
-		path->content = graph[end];
-		i = 0;
-		while(graph[cur]->parent != -1)
+		box = init_ek_info(graph, end, 0);
+		while(graph[box->cur]->parent != -1)
 		{
-			if (inc_flow(par, cur) < 0)
+			if (inc_flow(box->par, box->cur) < 0)
 				return (NULL);
-			if (dec_flow(graph[cur], par->id) < 0)
+			if (dec_flow(graph[box->cur], box->par->id) < 0)
 				return (NULL);
-			ek_alg_mk_twin(par, start);
-			path = ek_alg_mk_path(par, path);
-			par = next_parant(graph, par, &cur);
-			i++;
+			ek_alg_mk_twin(box->par, start);
+			box->path = ek_alg_mk_path(box->par, box->path);
+			box->par = next_parant(graph, box->par, &(box->cur));
+			(box->i)++;
 		}
-		path_l = ek_alg_mk_path_l(path_l, path, i);
+		pthagr = ek_alg_mk_pagr(pthagr, box);
 	}
-	return (path_l);
+	free(box);
+	return (pthagr);
 }

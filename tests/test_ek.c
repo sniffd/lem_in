@@ -2,14 +2,17 @@
 #include <stdio.h>
 #include "lem_in.h"
 
-void		print_paths(t_list *path_list)
+void		print_paths(t_path_agr *paths)
 {
 	t_list		*path;
+	t_path_l	*path_list;
 
+	path_list = paths->path_l;
 	printf("Paths: \n");
 	while(path_list)
 	{
-		path = path_list->content;
+		path = path_list->path;
+		printf("size: %zu\n", path_list->len);
 		while(path)
 		{
 			printf("%d", ((t_room*)path->content)->id);
@@ -92,7 +95,7 @@ t_room		**create_graph_1(int *st, int *ed)
 	return (rooms);
 }
 
-t_room		**create_graph_2(int *st, int *ed)
+t_room		**create_graph_2(int *st, int *ed, size_t *size)
 {
 	t_room		**rooms;
 	t_rlist		*adj;
@@ -101,6 +104,7 @@ t_room		**create_graph_2(int *st, int *ed)
 
 	start = 0;
 	end = 10;
+	*size = 12;
 	*st = start;
 	*ed = end;
 	rooms = (t_room**)malloc(sizeof(t_room*) * 12);
@@ -250,16 +254,16 @@ int main(void)
 	int			end;
 	size_t		size;
 	t_room		**rooms;
-	t_list		*path_list;
+	t_path_agr	*paths;
 
 
 	//		***
 	//		***
 	//		5 rooms
 
-	rooms = create_graph_3(&start, &end, &size);
+	rooms = create_graph_2(&start, &end, &size);
 	//print_info(rooms);
-	path_list = edm_karp_alg(rooms, start, end, size);
-	print_paths(path_list);
+	paths = edm_karp_alg(rooms, start, end, size, 500);
+	print_paths(paths);
 	return (0);
 }

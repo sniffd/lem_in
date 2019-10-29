@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   avlt_services.c                                    :+:      :+:    :+:   */
+/*   ft_lem_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 17:25:05 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 14:27:30 by gbrandon         ###   ########.fr       */
+/*   Created: 2019/10/29 15:19:03 by gbrandon          #+#    #+#             */
+/*   Updated: 2019/10/29 15:26:02 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "avlt.h"
 #include "lem_in.h"
 
-void	*ins(void *ins)
+void	del_lst(void *it, size_t s)
 {
-	return (ins);
-}
-
-int		cmp(void *p1, void *p2)
-{
-	return (ft_strcmp(p1, p2));
+	it = NULL;
+	s++;
+	return ;
 }

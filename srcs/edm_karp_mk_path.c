@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 20:50:19 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:14:58 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,40 @@ t_list		*ek_alg_mk_path(t_room *parent,  t_list *lst)
 	return (lst);
 }
 
-t_list		*ek_alg_mk_path_l(t_list *path_l, t_list *path, int length)
+t_path_l		*ek_alg_mk_path_l(t_path_l *path_l, t_list *path, size_t length)
 {
-	t_list		*temp;
+	t_path_l		*temp;
 
-	temp = (t_list*)malloc(sizeof(t_list));
-	temp->content = path;
-	temp->content_size = length;
-	ft_lstadd(&path_l, temp);
+	temp = (t_path_l*)malloc(sizeof(t_path_l));
+	temp->path = path;
+	temp->len = length;
+	temp->flow = 0;
+	temp->cap = -1;
+	temp->next = path_l;
+	path_l = temp;
 	return (path_l);
+}
+
+t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box)
+{
+	int		temp;
+
+	pagr->L += box->i;
+	(pagr->pths)++;
+	temp = ((pagr->L) + (pagr->ants)) / pagr->pths;
+	if (((pagr->L) + (pagr->ants)) % pagr->pths != 0)
+		temp++;
+	else
+		temp--;
+	if (pagr->dx > temp)
+	{
+		pagr->dx = temp;
+		pagr->path_l = ek_alg_mk_path_l(pagr->path_l, box->path, box->i);
+	}
+	else
+	{
+		pagr->dx = -1;
+		ft_lstdel(&(box->path), del_lst);
+	}
+	return(pagr);
 }
