@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 project(lem_in C)
 
+add_custom_target(fff
+		COMMAND make rule
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_compile_options(-Weverything)
+
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
@@ -96,10 +102,13 @@ add_executable(lem_in
 		libft/libft.h
 		srcs/avlt_services.c
 		srcs/edm_karp_alg.c
+		srcs/edm_karp_mk_path.c
 		srcs/edm_karp_mk_twin.c
 		srcs/ft_bfs.c
 		srcs/ft_lem_cnstrctrs.c
+		srcs/ft_lem_free.c
+		srcs/ft_lem_release_antsi.c
 		srcs/ft_queue.c
 		srcs/main.c
-		srcs/qnode_services.c
-		tests/test_que.c srcs/parse.c)
+		srcs/parse.c
+		srcs/qnode_services.c)

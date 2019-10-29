@@ -21,7 +21,7 @@ void	*ins(void *ins)
 
 int		cmp(void *p1, void *p2)
 {
-	return (ft_strcmp(p1, p2));
+	return (ft_strcmp(((t_room*)p1)->name, ((t_room*)p2)->name));
 }
 
 t_room	*get_room(t_avlt *tr, char *name)
