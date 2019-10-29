@@ -6,27 +6,36 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:38:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 19:10:34 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 22:15:36 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> //!!printf
 #include "lem_in.h"
 
-static void		print_ants(t_list *ants)
+static int		calc_cap(t_path_agr *paths, t_path_l *path_l)
+{
+	int		val;
+
+	val = (paths->L + paths->ants) / paths->pths - path_l->len;
+	if (((paths->L + paths->ants) % paths->pths) != 0)
+		val++;
+	return (val);
+}
+
+void			print_ants(t_list *ants)
 {
 	while (ants)
 	{
 		printf("L%zu-%s", ants->content_size, ((t_room*)((t_list*)ants->content)->content)->name); // !!printf
-		//printf("L%zu-", ants->content_size); // !!printf
-		printf("hi!\n");
 		if (ants->next)
-			printf(" ");
+			printf(" "); //! printf
 		ants = ants->next;
 	}
+	printf("\n");
 }
 
-static t_list	*init_ant(size_t id, t_list *path)
+t_list			*init_ant(size_t id, t_list *path)
 {
 	t_list	*ant;
 
@@ -37,12 +46,14 @@ static t_list	*init_ant(size_t id, t_list *path)
 	return (ant);
 }
 
-static void		move_ants(t_list **ans, int end)
+void			move_ants(t_list **ans, int end)
 {
 	t_list		*temp;
 	t_list		*ants;
+	t_list		*prev;
 
 	ants = *ans;
+	prev = NULL;
 	while (ants)
 	{
 		if (((t_room*)((t_list*)ants->content)->content)->id != end)
@@ -53,10 +64,13 @@ static void		move_ants(t_list **ans, int end)
 			ants = ants->next;
 			if (temp == *ans)
 				*ans = ants;
+			if (prev != NULL)
+				prev->next = ants;
 			free(temp);
 			temp = NULL;
 			continue;
 		}
+		prev = ants;
 		ants = ants->next;
 	}
 }
@@ -64,7 +78,6 @@ static void		move_ants(t_list **ans, int end)
 int				release_antsi(t_path_agr *paths, int end)
 {
 	t_list		*ants;
-	t_list		*new_ant;
 	t_path_l	*path_l;
 	size_t		ants_num;
 
@@ -77,22 +90,13 @@ int				release_antsi(t_path_agr *paths, int end)
 		while (path_l)
 		{
 			if (path_l->cap < 0)
-				path_l->cap = (paths->L + paths->ants) / paths->pths - path_l->len;
+				path_l->cap = calc_cap(paths, path_l);
 			if (path_l->cap > path_l->flow)
-			{
-				new_ant = init_ant(ants_num, path_l->path->next);
-				ft_lstadd(&ants, new_ant);
-				(path_l->flow)++;
-				ants_num++;
-			}
+				release_antsi_do(&ants_num, path_l, &ants);
 			path_l = path_l->next;
 		}
 		print_ants(ants);
 	}
-	while (ants)
-	{
-		move_ants(&ants, end);
-		print_ants(ants);
-	}
+	release_antsi_pr_end(ants, end);
 	return (0);
 }
