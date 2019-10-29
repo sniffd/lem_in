@@ -263,7 +263,8 @@ int main(void)
 
 	rooms = create_graph_2(&start, &end, &size);
 	//print_info(rooms);
-	paths = edm_karp_alg(rooms, start, end, size, 500);
-	print_paths(paths);
+	paths = edm_karp_alg(rooms, start, end, size, 4);
+	//print_paths(paths);
+	release_antsi(paths, end);
 	return (0);
 }

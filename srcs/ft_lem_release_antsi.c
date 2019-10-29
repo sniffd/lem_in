@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:38:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 17:15:52 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 19:10:34 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 
 static void		print_ants(t_list *ants)
 {
-	while(ants)
+	while (ants)
 	{
-		printf("L%d-%s", ants->content_size, ((t_room*)ants->content)->name); // !!printf
+		printf("L%zu-%s", ants->content_size, ((t_room*)((t_list*)ants->content)->content)->name); // !!printf
+		//printf("L%zu-", ants->content_size); // !!printf
+		printf("hi!\n");
 		if (ants->next)
 			printf(" ");
 		ants = ants->next;
 	}
 }
 
-static t_list	*init_ant(size_t id, t_list *room)
+static t_list	*init_ant(size_t id, t_list *path)
 {
 	t_list	*ant;
 
 	ant = ft_lstnew(NULL, 0);
-	ant->content = room;
+	ant->content = path;
 	ant->content_size = id;
 	ant->next = NULL;
 	return (ant);
@@ -49,9 +51,10 @@ static void		move_ants(t_list **ans, int end)
 		{
 			temp = ants;
 			ants = ants->next;
-			if (temp == ans)
+			if (temp == *ans)
 				*ans = ants;
 			free(temp);
+			temp = NULL;
 			continue;
 		}
 		ants = ants->next;
@@ -65,7 +68,7 @@ int				release_antsi(t_path_agr *paths, int end)
 	t_path_l	*path_l;
 	size_t		ants_num;
 
-	ants_num = paths->ants;
+	ants_num = 0;
 	ants = NULL;
 	while (ants_num < paths->ants)
 	{
@@ -77,7 +80,7 @@ int				release_antsi(t_path_agr *paths, int end)
 				path_l->cap = (paths->L + paths->ants) / paths->pths - path_l->len;
 			if (path_l->cap > path_l->flow)
 			{
-				new_ant = init_ant(ants_num, path_l->path);
+				new_ant = init_ant(ants_num, path_l->path->next);
 				ft_lstadd(&ants, new_ant);
 				(path_l->flow)++;
 				ants_num++;
@@ -91,4 +94,5 @@ int				release_antsi(t_path_agr *paths, int end)
 		move_ants(&ants, end);
 		print_ants(ants);
 	}
+	return (0);
 }

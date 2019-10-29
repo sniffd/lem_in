@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:25:05 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 14:27:30 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 19:33:09 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,17 @@ void	*ins(void *ins)
 int		cmp(void *p1, void *p2)
 {
 	return (ft_strcmp(p1, p2));
+}
+
+t_room	*get_room(t_avlt *tr, char *name)
+{
+	if (!tr)
+		return (NULL);
+	if (ft_strcmp(name, ((t_room*)tr->item)->name) == 0)
+		return (tr->item);
+	else if (ft_strcmp(name, ((t_room*)tr->item)->name) < 0)
+		return (get_room(tr->left, name));
+	else if (ft_strcmp(name, ((t_room*)tr->item)->name) > 0)
+		return (get_room(tr->right, name));
+	return (NULL);
 }
