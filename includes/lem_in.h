@@ -72,5 +72,11 @@ t_path_agr		*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box);
 void			del_lst(void *it, size_t s);
 int				release_antsi(t_path_agr *paths, int end);
 t_room			*get_room(t_avlt *tr, char *name);
+t_list			*init_ant(size_t id, t_list *path);
+void			release_antsi_do(size_t *ants_num, t_path_l *path_l,
+t_list **ants);
+void			print_ants(t_list *ants);
+void			move_ants(t_list **ans, int end);
+void			release_antsi_pr_end(t_list *ants, int end);
 
 #endif

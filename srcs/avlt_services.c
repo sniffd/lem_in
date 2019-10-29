@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:25:05 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 19:33:09 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/29 21:28:55 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ins(void *ins)
 
 int		cmp(void *p1, void *p2)
 {
-	return (ft_strcmp(p1, p2));
+	return (ft_strcmp(((t_room*)p1)->name, ((t_room*)p2)->name));
 }
 
 t_room	*get_room(t_avlt *tr, char *name)

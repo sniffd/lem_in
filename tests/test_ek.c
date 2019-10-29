@@ -107,7 +107,7 @@ t_room		**create_graph_2(int *st, int *ed, size_t *size)
 	*size = 12;
 	*st = start;
 	*ed = end;
-	rooms = (t_room**)malloc(sizeof(t_room*) * 12);
+	rooms = (t_room**)malloc(sizeof(t_room*) * *size);
 
 	rooms[0] = init_room(0, "s", 0, 0);
 	adj = init_rlist(1);
@@ -135,47 +135,47 @@ t_room		**create_graph_2(int *st, int *ed, size_t *size)
 	adj->next->next = init_rlist(0);
 	rooms[3]->lst = adj;
 
-	rooms[4] = init_room(4, "t", 0, 0);
+	rooms[4] = init_room(4, "4", 0, 0);
 	adj = init_rlist(3);
 	adj->next = init_rlist(5);
 	rooms[4]->lst = adj;
 
-	rooms[5] = init_room(5, "2", 0, 0);
+	rooms[5] = init_room(5, "5", 0, 0);
 	adj = init_rlist(4);
 	adj->next = init_rlist(6);
 	adj->next->next = init_rlist(11);
 	rooms[5]->lst = adj;
 
-	rooms[6] = init_room(6, "2", 0, 0);
+	rooms[6] = init_room(6, "6", 0, 0);
 	adj = init_rlist(7);
 	adj->next = init_rlist(end);
 	adj->next->next = init_rlist(5);
 	rooms[6]->lst = adj;
 
-	rooms[11] = init_room(11, "2", 0, 0);
+	rooms[11] = init_room(11, "11", 0, 0);
 	adj = init_rlist(5);
 	adj->next = init_rlist(end);
 	rooms[11]->lst = adj;
 
-	rooms[7] = init_room(7, "2", 0, 0);
+	rooms[7] = init_room(7, "7", 0, 0);
 	adj = init_rlist(2);
 	adj->next = init_rlist(6);
 	adj->next->next = init_rlist(8);
 	rooms[7]->lst = adj;
 
-	rooms[end] = init_room(end, "2", 0, 0);
+	rooms[end] = init_room(end, "t", 0, 0);
 	adj = init_rlist(9);
 	adj->next = init_rlist(6);
 	adj->next->next = init_rlist(11);
 	rooms[end]->lst = adj;
 
-	rooms[8] = init_room(8, "2", 0, 0);
+	rooms[8] = init_room(8, "8", 0, 0);
 	adj = init_rlist(7);
 	adj->next = init_rlist(9);
 	adj->next->next = init_rlist(1);
 	rooms[8]->lst = adj;
 
-	rooms[9] = init_room(9, "2", 0, 0);
+	rooms[9] = init_room(9, "9", 0, 0);
 	adj = init_rlist(8);
 	adj->next = init_rlist(end);
 	adj->next->next = init_rlist(start);
@@ -235,12 +235,12 @@ t_room		**create_graph_3(int *st, int *ed, size_t *size)
 	adj->next->next = init_rlist(7);
 	rooms[end]->lst = adj;
 
-	rooms[6] = init_room(6, "3", 0, 0);
+	rooms[6] = init_room(6, "6", 0, 0);
 	adj = init_rlist(end);
 	adj->next = init_rlist(2);
 	rooms[6]->lst = adj;
 
-	rooms[7] = init_room(7, "3", 0, 0);
+	rooms[7] = init_room(7, "7", 0, 0);
 	adj = init_rlist(end);
 	adj->next = init_rlist(3);
 	rooms[7]->lst = adj;
@@ -261,9 +261,9 @@ int main(void)
 	//		***
 	//		5 rooms
 
-	rooms = create_graph_2(&start, &end, &size);
+	rooms = create_graph_3(&start, &end, &size);
 	//print_info(rooms);
-	paths = edm_karp_alg(rooms, start, end, size, 4);
+	paths = edm_karp_alg(rooms, start, end, size, 100000);
 	//print_paths(paths);
 	release_antsi(paths, end);
 	return (0);
