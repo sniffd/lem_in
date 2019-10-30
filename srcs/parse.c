@@ -88,7 +88,7 @@ void		appt_adj(void *aa)      // for tree printing
 	printf("\n");
 }
 
-int			*parse()
+int			*parse(t_room ***gr, size_t *size, size_t *ants)
 {
 	char	*line;
 	char	*name;
@@ -105,7 +105,7 @@ int			*parse()
 	line = NULL;
 	root = NULL;
 	f = 0;
-	id = 1;
+	id = 0;
 	ret = 1;
 	printf("SUKA\n");
 	if (get_next_line(0, &line) <= 0)
@@ -130,13 +130,18 @@ int			*parse()
 	printf("\n\n->Current tree content: \n");
 	post_order(root, appt); // just for test
 
+	t_room		**graph;
+	graph = (t_room**)malloc(sizeof(t_room*) * id);
+
 	while (ret && line && *line)
 	{
 		if (*line != '#')
 		{
 			link = ft_strsplit(line, '-');
 			room_one = get_room(root, link[0]);
+			graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
+			graph[room_two->id] = room_two;
 			if (!(room_one->lst))
 			{
 				//** i wrote init_rlist right for this) **
@@ -184,6 +189,8 @@ int			*parse()
 	post_order(root, appt_adj); // just for test
 
 	printf("all\n");
-
-	return (0);   // value up to u
+	*gr = graph;
+	*size = id;
+	*ants = lems;
+	return (0);
 }

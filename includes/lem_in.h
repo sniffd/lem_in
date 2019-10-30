@@ -60,7 +60,7 @@ t_rlist			*init_rlist(int id);
 t_path_agr		*init_path_agr(int l, int n, int k);
 t_ek_info		*init_ek_info(t_room **graph, int end, int cntr);
 void			*ins(void *ins);
-int				*parse();
+int				*parse(t_room ***gr, size_t *size, size_t *ants);
 int				cmp(void *p1, void *p2);
 void			*q_input(void *it);
 int				ft_bfs_int(t_room **graph, int start, int end, size_t s);
@@ -72,6 +72,7 @@ t_path_agr		*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box);
 void			del_lst(void *it, size_t s);
 int				release_antsi(t_path_agr *paths, int end);
 t_room			*get_room(t_avlt *tr, char *name);
+t_room			*get_room_id(t_avlt *tr, int id);
 t_list			*init_ant(size_t id, t_list *path);
 void			release_antsi_do(size_t *ants_num, t_path_l *path_l,
 t_list **ants);
@@ -81,5 +82,7 @@ void			release_antsi_pr_end(t_list *ants, int end);
 void			lem_del_paths(t_path_agr **paths);
 void			lem_del_rlist(t_rlist *adj);
 void			lem_del_rooms(t_room ***graph, size_t s);
+void			lem_del_tree(t_avlt **tr);
+t_room			**ft_lem_trrtoarr(t_avlt *tr, size_t s);
 
 #endif
