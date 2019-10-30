@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 15:30:09 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/30 16:20:49 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ static int		dec_flow(t_room *room, int connect)
 	return (0);
 }
 
-static t_room		*next_parant(t_room **graph, t_room *par, int *cur)
+static t_room		*next_parent(t_room **graph, t_room *par, int *cur)
 {
 	*cur = par->id;
+	if (graph[*cur]->parent == -1)
+		return (NULL);
 	return (graph[graph[*cur]->parent]);
 }
 
@@ -80,16 +82,18 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 		while(graph[box->cur]->parent != -1)
 		{
 			if (inc_flow(box->par, box->cur) < 0)
+			// if cant find vertex in adjacency list than error do not forget to free box
+			// the same for below dec_flow
 				return (NULL);
 			if (dec_flow(graph[box->cur], box->par->id) < 0)
 				return (NULL);
 			ek_alg_mk_twin(box->par, start);
 			box->path = ek_alg_mk_path(box->par, box->path);
-			box->par = next_parant(graph, box->par, &(box->cur));
+			box->par = next_parent(graph, box->par, &(box->cur));
 			(box->i)++;
 		}
 		pthagr = ek_alg_mk_pagr(pthagr, box);
+		free(box);
 	}
-	free(box);
 	return (pthagr);
 }

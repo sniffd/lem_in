@@ -78,5 +78,8 @@ t_list **ants);
 void			print_ants(t_list *ants);
 void			move_ants(t_list **ans, int end);
 void			release_antsi_pr_end(t_list *ants, int end);
+void			lem_del_paths(t_path_agr **paths);
+void			lem_del_rlist(t_rlist *adj);
+void			lem_del_rooms(t_room ***graph, size_t s);
 
 #endif

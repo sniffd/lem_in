@@ -261,10 +261,12 @@ int main(void)
 	//		***
 	//		5 rooms
 
-	rooms = create_graph_3(&start, &end, &size);
+	rooms = create_graph_2(&start, &end, &size);
 	//print_info(rooms);
 	paths = edm_karp_alg(rooms, start, end, size, 100000);
 	//print_paths(paths);
 	release_antsi(paths, end);
+	lem_del_paths(&paths);
+	lem_del_rooms(&rooms, size);
 	return (0);
 }

@@ -49,6 +49,7 @@ $(LIB):
 	cd $(LIBDIR) && $(MAKE) -s
 
 $(OBJS): $(OBJSDIR)/%.o : $(SRCSDIR)/%.c $(HEADERDIR)/$(HEADER)
+	mkdir -p objs
 	$(CC) $(CC_FLAGS) -I$(HEADERDIR) -I$(LIBDIR) -c $< -o $@
 
 #

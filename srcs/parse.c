@@ -108,31 +108,41 @@ int			*parse()
 			room_two = get_room(root, link[1]);
 			if (!(room_one->lst))
 			{
-				room_one->lst = ft_memalloc(sizeof(t_rlist));
-				room_one->lst->id = room_two->id;
+				//** i wrote init_rlist right for this) **
+
+				room_one->lst = init_rlist(room_two->id);
+
+				//room_one->lst = ft_memalloc(sizeof(t_rlist));
+				//room_one->lst->id = room_two->id;
 			}
 			else
 			{
 				tmp = room_one->lst;
 				while (tmp->next)
 					tmp = tmp->next;
-				tmp->next = ft_memalloc(sizeof(t_rlist));
-				tmp = tmp->next;
-				tmp->id = room_two->id;
+				tmp->next = init_rlist(room_two->id);
+
+				//tmp->next = ft_memalloc(sizeof(t_rlist));
+				//tmp = tmp->next;
+				//tmp->id = room_two->id;
 			}
 			if (!(room_two->lst))
 			{
-				room_two->lst = ft_memalloc(sizeof(t_rlist));
-				room_two->lst->id = room_one->id;
+				room_two->lst = init_rlist(room_one->id);
+
+				//room_two->lst = ft_memalloc(sizeof(t_rlist));
+				//room_two->lst->id = room_one->id;
 			}
 			else
 			{
 				tmp = room_two->lst;
 				while (tmp->next)
 					tmp = tmp->next;
-				tmp->next = ft_memalloc(sizeof(t_rlist));
-				tmp = tmp->next;
-				tmp->id = room_one->id;
+				tmp->next = init_rlist(room_one->id);
+				
+				//tmp->next = ft_memalloc(sizeof(t_rlist));
+				//tmp = tmp->next;
+				//tmp->id = room_one->id;
 			}
 			free(link);
 		}
