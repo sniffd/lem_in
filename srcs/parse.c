@@ -61,6 +61,33 @@ int			atoi_lem_in(char **str, int *f)
 		return (pres(str, f));
 }
 
+void		appt(void *aa)      // for tree printing
+{
+	t_room *a;
+
+	a = aa;
+	printf("name: %s\n", a->name);
+}
+
+void		appt_adj(void *aa)      // for tree printing
+{
+	t_room 	*a;
+	t_rlist	*adj;
+
+	a = aa;
+	adj = a->lst;
+	printf("->node: %s", a->name);
+	printf("-->list: ");
+	while (adj)
+	{
+		printf("%d", adj->id);
+		if (adj->next)
+			printf(" ");
+		adj = adj->next;
+	}
+	printf("\n");
+}
+
 int			*parse()
 {
 	char	*line;
@@ -93,12 +120,16 @@ int			*parse()
 	{
 		if (ft_strchr(line, '#'))
 			continue;
-		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line : ft_strchr(line, '#') - line);
+		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
 		add_node(&root, init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0), cmp, ins);
 		free(name);
 		free(line);
 		id++;
 	}
+
+	printf("\n\n->Current tree content: \n");
+	post_order(root, appt); // just for test
+
 	while (ret && line && *line)
 	{
 		if (*line != '#')
@@ -148,6 +179,10 @@ int			*parse()
 		}
 		ret = get_next_line(0, &line);
 	}
+
+	printf("->Current tree content with adjacency: \n");
+	post_order(root, appt_adj); // just for test
+
 	printf("all\n");
 
 	return (0);   // value up to u
