@@ -88,16 +88,19 @@ void		appt_adj(void *aa)      // for tree printing
 	printf("\n");
 }
 
-int			*parse(t_room ***gr, size_t *size, size_t *ants)
+int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 {
 	char	*line;
 	char	*name;
 	char	**link;
+	char	start;
+	char	end;
 	int		f;
 	int		lems;
 	int		id;
 	int		ret;
 	t_avlt	*root;
+	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
 	t_rlist	*tmp;
@@ -107,6 +110,8 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 	f = 0;
 	id = 0;
 	ret = 1;
+	start = 0;
+	end = 0;
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
 	lems = atoi_lem_in(&line, &f);
@@ -118,11 +123,24 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
 		if (ft_strchr(line, '#'))
+		{
+			if (ft_strcmp(line, "##start"))
+				start = 1;
+			else if (ft_strcmp(line, "##end"))
+				end = 1;
 			continue;
+		}
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
-		add_node(&root, init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0), cmp, ins);
+		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
+		if (start)
+			room->start = 1;
+		else if (end)
+			room->end = 1;
+		add_node(&root, room, cmp, ins);
 		free(name);
 		free(line);
+		start = 0;
+		end = 0;
 		id++;
 	}
 
@@ -142,9 +160,7 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 			room_two = get_room(root, link[1]);
 			graph[room_two->id] = room_two;
 			if (!(room_one->lst))
-			{
 				room_one->lst = init_rlist(room_two->id);
-			}
 			else
 			{
 				tmp = room_one->lst;

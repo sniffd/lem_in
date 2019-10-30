@@ -20,6 +20,6 @@ int		main(int argc, char **argv)
 	size_t	p2;
 
 
-	parse(&gr, &p1, &p2);
+	parse_lem(&gr, &p1, &p2);
 	return 0;
 }

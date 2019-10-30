@@ -21,6 +21,8 @@ typedef struct	s_room
 	int				id;			// id = id		at start
 	char			*name;		// name = name	at start
 	char 			mark;		// mark = -1	at start
+	char 			start;
+	char 			end;
 	int				parent;		// parent = -1	at start
 	int				x;			// x = x		at start
 	int				y;			// y = y		at start
@@ -60,7 +62,7 @@ t_rlist			*init_rlist(int id);
 t_path_agr		*init_path_agr(int l, int n, int k);
 t_ek_info		*init_ek_info(t_room **graph, int end, int cntr);
 void			*ins(void *ins);
-int				*parse(t_room ***gr, size_t *size, size_t *ants);
+int				*parse_lem(t_room ***gr, size_t *size, size_t *ants);
 int				cmp(void *p1, void *p2);
 void			*q_input(void *it);
 int				ft_bfs_int(t_room **graph, int start, int end, size_t s);
