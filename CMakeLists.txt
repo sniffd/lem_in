@@ -1,12 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(lem_in C)
 
-add_custom_target(fff
-		COMMAND make rule
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-add_compile_options(-Weverything)
-
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
@@ -108,7 +102,8 @@ add_executable(lem_in
 		srcs/ft_lem_cnstrctrs.c
 		srcs/ft_lem_free.c
 		srcs/ft_lem_release_antsi.c
+		srcs/ft_lem_release_antsi_serv.c
 		srcs/ft_queue.c
-		srcs/main.c
 		srcs/parse.c
-		srcs/qnode_services.c)
+		srcs/qnode_services.c
+		tests/main.c)
