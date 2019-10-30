@@ -1,105 +1,137 @@
 cmake_minimum_required(VERSION 3.15)
 project(lem_in C)
 
-add_custom_target(fff
-		COMMAND make rule
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-add_compile_options(-Weverything)
-
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
-include_directories(libft)
+include_directories(printf)
+include_directories(printf/libft)
 
 add_executable(lem_in
 		includes/ft_queue.h
 		includes/lem_in.h
-		libft/avlt.c
-		libft/avlt.h
-		libft/avlt_balance.c
-		libft/avlt_del.c
-		libft/avlt_tranc.c
-		libft/ft_abs.c
-		libft/ft_atoi.c
-		libft/ft_bzero.c
-		libft/ft_delchr.c
-		libft/ft_isalnum.c
-		libft/ft_isalpha.c
-		libft/ft_isascii.c
-		libft/ft_isdigit.c
-		libft/ft_isprint.c
-		libft/ft_itoa.c
-		libft/ft_itoa_base.c
-		libft/ft_lstadd.c
-		libft/ft_lstadd_back.c
-		libft/ft_lstdel.c
-		libft/ft_lstdelone.c
-		libft/ft_lstiter.c
-		libft/ft_lstlast.c
-		libft/ft_lstmap.c
-		libft/ft_lstnew.c
-		libft/ft_lstsize.c
-		libft/ft_memalloc.c
-		libft/ft_memcat.c
-		libft/ft_memccpy.c
-		libft/ft_memchr.c
-		libft/ft_memcmp.c
-		libft/ft_memcpy.c
-		libft/ft_memdel.c
-		libft/ft_memfjoin.c
-		libft/ft_memjoin.c
-		libft/ft_memmove.c
-		libft/ft_memrchr.c
-		libft/ft_memset.c
-		libft/ft_memsub.c
-		libft/ft_numlen.c
-		libft/ft_printf.h
-		libft/ft_putchar.c
-		libft/ft_putchar_fd.c
-		libft/ft_putcharn.c
-		libft/ft_putendl.c
-		libft/ft_putendl_fd.c
-		libft/ft_putnbr.c
-		libft/ft_putnbr_fd.c
-		libft/ft_putstr.c
-		libft/ft_putstr_fd.c
-		libft/ft_stoa.c
-		libft/ft_strcat.c
-		libft/ft_strchlen.c
-		libft/ft_strchr.c
-		libft/ft_strchtrim.c
-		libft/ft_strclr.c
-		libft/ft_strcmp.c
-		libft/ft_strcpy.c
-		libft/ft_strdel.c
-		libft/ft_strdup.c
-		libft/ft_strequ.c
-		libft/ft_striter.c
-		libft/ft_striteri.c
-		libft/ft_strjoin.c
-		libft/ft_strlcat.c
-		libft/ft_strlen.c
-		libft/ft_strmap.c
-		libft/ft_strmapi.c
-		libft/ft_strncat.c
-		libft/ft_strncmp.c
-		libft/ft_strncpy.c
-		libft/ft_strnequ.c
-		libft/ft_strnew.c
-		libft/ft_strnstr.c
-		libft/ft_strrchr.c
-		libft/ft_strsplit.c
-		libft/ft_strstr.c
-		libft/ft_strsub.c
-		libft/ft_strtolower.c
-		libft/ft_strtrim.c
-		libft/ft_swap.c
-		libft/ft_tolower.c
-		libft/ft_toupper.c
-		libft/get_next_line.c
-		libft/get_next_line.h
-		libft/libft.h
+		printf/libft/avlt.c
+		printf/libft/avlt.h
+		printf/libft/avlt_balance.c
+		printf/libft/avlt_del.c
+		printf/libft/avlt_tranc.c
+		printf/libft/ft_abs.c
+		printf/libft/ft_atoi.c
+		printf/libft/ft_bzero.c
+		printf/libft/ft_delchr.c
+		printf/libft/ft_isalnum.c
+		printf/libft/ft_isalpha.c
+		printf/libft/ft_isascii.c
+		printf/libft/ft_isdigit.c
+		printf/libft/ft_isprint.c
+		printf/libft/ft_itoa.c
+		printf/libft/ft_itoa_base.c
+		printf/libft/ft_lstadd.c
+		printf/libft/ft_lstadd_back.c
+		printf/libft/ft_lstdel.c
+		printf/libft/ft_lstdelone.c
+		printf/libft/ft_lstiter.c
+		printf/libft/ft_lstlast.c
+		printf/libft/ft_lstmap.c
+		printf/libft/ft_lstnew.c
+		printf/libft/ft_lstsize.c
+		printf/libft/ft_memalloc.c
+		printf/libft/ft_memcat.c
+		printf/libft/ft_memccpy.c
+		printf/libft/ft_memchr.c
+		printf/libft/ft_memcmp.c
+		printf/libft/ft_memcpy.c
+		printf/libft/ft_memdel.c
+		printf/libft/ft_memfjoin.c
+		printf/libft/ft_memjoin.c
+		printf/libft/ft_memmove.c
+		printf/libft/ft_memrchr.c
+		printf/libft/ft_memset.c
+		printf/libft/ft_memsub.c
+		printf/libft/ft_numlen.c
+		printf/libft/ft_printf.h
+		printf/libft/ft_putchar.c
+		printf/libft/ft_putchar_fd.c
+		printf/libft/ft_putcharn.c
+		printf/libft/ft_putendl.c
+		printf/libft/ft_putendl_fd.c
+		printf/libft/ft_putnbr.c
+		printf/libft/ft_putnbr_fd.c
+		printf/libft/ft_putstr.c
+		printf/libft/ft_putstr_fd.c
+		printf/libft/ft_stoa.c
+		printf/libft/ft_strcat.c
+		printf/libft/ft_strchlen.c
+		printf/libft/ft_strchr.c
+		printf/libft/ft_strchtrim.c
+		printf/libft/ft_strclr.c
+		printf/libft/ft_strcmp.c
+		printf/libft/ft_strcpy.c
+		printf/libft/ft_strdel.c
+		printf/libft/ft_strdup.c
+		printf/libft/ft_strequ.c
+		printf/libft/ft_striter.c
+		printf/libft/ft_striteri.c
+		printf/libft/ft_strjoin.c
+		printf/libft/ft_strlcat.c
+		printf/libft/ft_strlen.c
+		printf/libft/ft_strmap.c
+		printf/libft/ft_strmapi.c
+		printf/libft/ft_strncat.c
+		printf/libft/ft_strncmp.c
+		printf/libft/ft_strncpy.c
+		printf/libft/ft_strnequ.c
+		printf/libft/ft_strnew.c
+		printf/libft/ft_strnstr.c
+		printf/libft/ft_strrchr.c
+		printf/libft/ft_strsplit.c
+		printf/libft/ft_strstr.c
+		printf/libft/ft_strsub.c
+		printf/libft/ft_strtolower.c
+		printf/libft/ft_strtrim.c
+		printf/libft/ft_swap.c
+		printf/libft/ft_tolower.c
+		printf/libft/ft_toupper.c
+		printf/libft/get_next_line.c
+		printf/libft/get_next_line.h
+		printf/libft/libft.h
+		printf/addcharn.c
+		printf/b.c
+		printf/big_hex.c
+		printf/binary.c
+		printf/c.c
+		printf/di.c
+		printf/di_ifelse_precison.c
+		printf/f.c
+		printf/f_round.c
+		printf/fraction.c
+		printf/fraction_path.c
+		printf/ft_printf.c
+		printf/ft_printf.h
+		printf/ft_vector.c
+		printf/func.c
+		printf/hex.c
+		printf/integer.c
+		printf/math_op_with_the_five.c
+		printf/multy_two.c
+		printf/nan.c
+		printf/o.c
+		printf/octal.c
+		printf/octal_chck_flags.c
+		printf/oflags.c
+		printf/oktotorp.c
+		printf/parse.c
+		printf/percent.c
+		printf/print_f.c
+		printf/s.c
+		printf/select_round.c
+		printf/u.c
+		printf/uflags.c
+		printf/uinteger.c
+		printf/whole.c
+		printf/x.c
+		printf/x_check_flags.c
+		printf/xflags.c
 		srcs/avlt_services.c
 		srcs/edm_karp_alg.c
 		srcs/edm_karp_mk_path.c
@@ -108,7 +140,8 @@ add_executable(lem_in
 		srcs/ft_lem_cnstrctrs.c
 		srcs/ft_lem_free.c
 		srcs/ft_lem_release_antsi.c
+		srcs/ft_lem_release_antsi_serv.c
 		srcs/ft_queue.c
-		srcs/main.c
 		srcs/parse.c
-		srcs/qnode_services.c)
+		srcs/qnode_services.c
+		tests/main.c)

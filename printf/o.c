@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   o.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 13:09:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:49:02 by fdaryn-h         ###   ########.fr       */
+/*   Created: 2019/07/19 14:14:28 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:14:28 by rkeli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-int		main(int argc, char **argv)
+void	octal(va_list ap)
 {
-	parse_lem();
-	return 0;
+	if (g_f->hh)
+		o_char(ap);
+	else if (g_f->h)
+		o_short(ap);
+	else if (g_f->ll)
+		o_long_long(ap);
+	else if (g_f->l)
+		o_long(ap);
+	else
+		o_int(ap);
 }

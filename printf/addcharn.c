@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   addcharn.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 13:09:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:49:02 by fdaryn-h         ###   ########.fr       */
+/*   Created: 2019/07/19 14:12:18 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:12:18 by rkeli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-int		main(int argc, char **argv)
+void	addcharn(char c, ssize_t n)
 {
-	parse_lem();
-	return 0;
+	while (n > 0)
+	{
+		g_vector = ft_vector(g_vector, &c, 5, 1);
+		n--;
+	}
 }

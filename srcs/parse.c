@@ -88,26 +88,32 @@ void		appt_adj(void *aa)      // for tree printing
 	printf("\n");
 }
 
-int			*parse(t_room ***gr, size_t *size, size_t *ants)
+t_sinfo		*parse_lem(void)
 {
 	char	*line;
 	char	*name;
 	char	**link;
+	char	start;
+	char	end;
 	int		f;
 	int		lems;
 	int		id;
 	int		ret;
 	t_avlt	*root;
+	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
+	t_room	**graph;
 	t_rlist	*tmp;
+	t_sinfo	*info;
 
 	line = NULL;
 	root = NULL;
 	f = 0;
 	id = 0;
 	ret = 1;
-	printf("SUKA\n");
+	start = 0;
+	end = 0;
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
 	lems = atoi_lem_in(&line, &f);
@@ -116,21 +122,34 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 		free(line);
 		return (NULL);
 	}
+	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
 		if (ft_strchr(line, '#'))
+		{
+			if (ft_strcmp(line, "##start"))
+				start = 1;
+			else if (ft_strcmp(line, "##end"))
+				end = 1;
 			continue;
+		}
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
-		add_node(&root, init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0), cmp, ins);
+		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
+		if (start)
+			info->start = room;
+		else if (end)
+			info->end = room;
+		add_node(&root, room, cmp, ins);
 		free(name);
 		free(line);
+		start = 0;
+		end = 0;
 		id++;
 	}
 
 	printf("\n\n->Current tree content: \n");
 	post_order(root, appt); // just for test
 
-	t_room		**graph;
 	graph = (t_room**)malloc(sizeof(t_room*) * id);
 
 	while (ret && line && *line)
@@ -143,42 +162,22 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 			room_two = get_room(root, link[1]);
 			graph[room_two->id] = room_two;
 			if (!(room_one->lst))
-			{
-				//** i wrote init_rlist right for this) **
-
 				room_one->lst = init_rlist(room_two->id);
-
-				//room_one->lst = ft_memalloc(sizeof(t_rlist));
-				//room_one->lst->id = room_two->id;
-			}
 			else
 			{
 				tmp = room_one->lst;
 				while (tmp->next)
 					tmp = tmp->next;
 				tmp->next = init_rlist(room_two->id);
-
-				//tmp->next = ft_memalloc(sizeof(t_rlist));
-				//tmp = tmp->next;
-				//tmp->id = room_two->id;
 			}
 			if (!(room_two->lst))
-			{
 				room_two->lst = init_rlist(room_one->id);
-
-				//room_two->lst = ft_memalloc(sizeof(t_rlist));
-				//room_two->lst->id = room_one->id;
-			}
 			else
 			{
 				tmp = room_two->lst;
 				while (tmp->next)
 					tmp = tmp->next;
 				tmp->next = init_rlist(room_one->id);
-				
-				//tmp->next = ft_memalloc(sizeof(t_rlist));
-				//tmp = tmp->next;
-				//tmp->id = room_one->id;
 			}
 			free(link);
 		}
@@ -188,9 +187,9 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 	printf("->Current tree content with adjacency: \n");
 	post_order(root, appt_adj); // just for test
 
+	info->graph = graph;
+	info->size = id;
+	info->lems = lems;
 	printf("all\n");
-	*gr = graph;
-	*size = id;
-	*ants = lems;
-	return (0);
+	return (info);
 }

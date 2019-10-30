@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   u.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 13:09:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:49:02 by fdaryn-h         ###   ########.fr       */
+/*   Created: 2019/07/19 14:15:41 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:15:41 by rkeli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-int		main(int argc, char **argv)
+void	uinteger(va_list ap)
 {
-	parse_lem();
-	return 0;
+	g_f->plu = 0;
+	g_f->spc = 0;
+	if (g_f->hh)
+		uint_char(ap);
+	else if (g_f->h)
+		uint_short(ap);
+	else if (g_f->ll)
+		uint_long_long(ap);
+	else if (g_f->l)
+		uint_long(ap);
+	else
+		uint_int(ap);
 }

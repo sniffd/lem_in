@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   b.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 13:09:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 21:49:02 by fdaryn-h         ###   ########.fr       */
+/*   Created: 2019/07/19 14:12:26 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:12:26 by rkeli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-int		main(int argc, char **argv)
+void	binary(va_list ap)
 {
-	parse_lem();
-	return 0;
+	if (g_f->hh)
+		b_char(ap);
+	else if (g_f->h)
+		b_short(ap);
+	else if (g_f->ll)
+		b_long_long(ap);
+	else if (g_f->l || g_f->f == 'p')
+		b_long(ap);
+	else
+		b_int(ap);
 }
