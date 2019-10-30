@@ -88,7 +88,7 @@ void		appt_adj(void *aa)      // for tree printing
 	printf("\n");
 }
 
-int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
+t_sinfo		*parse_lem(void)
 {
 	char	*line;
 	char	*name;
@@ -103,7 +103,9 @@ int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
+	t_room	**graph;
 	t_rlist	*tmp;
+	t_sinfo	*info;
 
 	line = NULL;
 	root = NULL;
@@ -120,6 +122,7 @@ int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 		free(line);
 		return (NULL);
 	}
+	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
 		if (ft_strchr(line, '#'))
@@ -133,9 +136,9 @@ int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
 		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
 		if (start)
-			room->start = 1;
+			info->start = room;
 		else if (end)
-			room->end = 1;
+			info->end = room;
 		add_node(&root, room, cmp, ins);
 		free(name);
 		free(line);
@@ -147,7 +150,6 @@ int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 	printf("\n\n->Current tree content: \n");
 	post_order(root, appt); // just for test
 
-	t_room		**graph;
 	graph = (t_room**)malloc(sizeof(t_room*) * id);
 
 	while (ret && line && *line)
@@ -185,9 +187,9 @@ int			*parse_lem(t_room ***gr, size_t *size, size_t *ants)
 	printf("->Current tree content with adjacency: \n");
 	post_order(root, appt_adj); // just for test
 
+	info->graph = graph;
+	info->size = id;
+	info->lems = lems;
 	printf("all\n");
-	*gr = graph;
-	*size = id;
-	*ants = lems;
-	return (0);
+	return (info);
 }

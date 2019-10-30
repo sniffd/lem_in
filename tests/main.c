@@ -15,11 +15,6 @@
 
 int		main(int argc, char **argv)
 {
-	t_room	**gr;
-	size_t	p1;
-	size_t	p2;
-
-
-	parse_lem(&gr, &p1, &p2);
+	parse_lem();
 	return 0;
 }

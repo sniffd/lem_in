@@ -55,6 +55,15 @@ typedef struct	s_ek_info
 	t_list			*path;
 }				t_ek_info;
 
+typedef struct	s_sinfo
+{
+	t_room	*start;
+	t_room	*end;
+	t_room	**graph;
+	int		lems;
+	size_t	size;
+}				t_sinfo;
+
 // t_room			*get_v(t_avlt *tr, char *name);
 // int				ft_bfs(t_avlt *graph, char *start, char *end);
 t_room			*init_room(int id, char *name, int x, int y);
@@ -62,7 +71,7 @@ t_rlist			*init_rlist(int id);
 t_path_agr		*init_path_agr(int l, int n, int k);
 t_ek_info		*init_ek_info(t_room **graph, int end, int cntr);
 void			*ins(void *ins);
-int				*parse_lem(t_room ***gr, size_t *size, size_t *ants);
+t_sinfo			*parse_lem(void);
 int				cmp(void *p1, void *p2);
 void			*q_input(void *it);
 int				ft_bfs_int(t_room **graph, int start, int end, size_t s);
