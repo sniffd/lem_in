@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 16:14:58 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/10/30 21:37:56 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box)
 	}
 	else
 	{
+		pagr->L -= box->i;
+		(pagr->pths)--;
 		pagr->dx = -1;
 		ft_lstdel(&(box->path), del_lst);
 	}

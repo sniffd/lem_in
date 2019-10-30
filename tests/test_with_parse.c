@@ -61,6 +61,9 @@ int main(void)
 	t_room		**rooms;
 	t_path_agr	*paths;
 
+	//t_path_l	*temp = NULL;
+	//t_path_l	*a;
+
 
 	//		***
 	//		***
@@ -73,9 +76,18 @@ int main(void)
 	//printf("size: %zu\n", size);
 	//print_info(rooms, size);
 	paths = edm_karp_alg(rooms, start, end, size, ants);
-	//print_paths(paths);
-	release_antsi(paths, end);
-	//lem_del_paths(&paths);
-	//lem_del_rooms(&rooms, size);
+	//temp = paths->path_l;
+	//while(paths->path_l)
+	//{
+	//	a = temp;
+	//	temp = paths->path_l;
+	//	paths->path_l = paths->path_l->next;
+	//	temp->next = a;
+	//}
+	//paths->path_l = temp;
+	print_paths(paths);
+	//release_antsi(paths, end);
+	lem_del_paths(&paths);
+	lem_del_rooms(&rooms, size);
 	return (0);
 }
