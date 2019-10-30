@@ -13,8 +13,13 @@
 #include "lem_in.h"
 #include <stdio.h>
 
-int		main()
+int		main(int argc, char **argv)
 {
-	parse();
+	t_room	**gr;
+	size_t	p1;
+	size_t	p2;
+
+
+	parse(&gr, &p1, &p2);
 	return 0;
 }

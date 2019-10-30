@@ -107,7 +107,6 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 	f = 0;
 	id = 0;
 	ret = 1;
-	printf("SUKA\n");
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
 	lems = atoi_lem_in(&line, &f);
@@ -144,12 +143,7 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 			graph[room_two->id] = room_two;
 			if (!(room_one->lst))
 			{
-				//** i wrote init_rlist right for this) **
-
 				room_one->lst = init_rlist(room_two->id);
-
-				//room_one->lst = ft_memalloc(sizeof(t_rlist));
-				//room_one->lst->id = room_two->id;
 			}
 			else
 			{
@@ -157,28 +151,15 @@ int			*parse(t_room ***gr, size_t *size, size_t *ants)
 				while (tmp->next)
 					tmp = tmp->next;
 				tmp->next = init_rlist(room_two->id);
-
-				//tmp->next = ft_memalloc(sizeof(t_rlist));
-				//tmp = tmp->next;
-				//tmp->id = room_two->id;
 			}
 			if (!(room_two->lst))
-			{
 				room_two->lst = init_rlist(room_one->id);
-
-				//room_two->lst = ft_memalloc(sizeof(t_rlist));
-				//room_two->lst->id = room_one->id;
-			}
 			else
 			{
 				tmp = room_two->lst;
 				while (tmp->next)
 					tmp = tmp->next;
 				tmp->next = init_rlist(room_one->id);
-				
-				//tmp->next = ft_memalloc(sizeof(t_rlist));
-				//tmp = tmp->next;
-				//tmp->id = room_one->id;
 			}
 			free(link);
 		}
