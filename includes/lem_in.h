@@ -21,8 +21,6 @@ typedef struct	s_room
 	int				id;			// id = id		at start
 	char			*name;		// name = name	at start
 	char 			mark;		// mark = -1	at start
-	char 			start;
-	char 			end;
 	int				parent;		// parent = -1	at start
 	int				x;			// x = x		at start
 	int				y;			// y = y		at start
@@ -57,8 +55,8 @@ typedef struct	s_ek_info
 
 typedef struct	s_sinfo
 {
-	t_room	*start;
-	t_room	*end;
+	int		start;
+	int		end;
 	t_room	**graph;
 	int		lems;
 	size_t	size;
@@ -95,5 +93,6 @@ void			lem_del_rlist(t_rlist *adj);
 void			lem_del_rooms(t_room ***graph, size_t s);
 void			lem_del_tree(t_avlt **tr);
 t_room			**ft_lem_trrtoarr(t_avlt *tr, size_t s);
+void			ek_alg_neg_e(t_room *cur, t_room *par, int start);
 
 #endif

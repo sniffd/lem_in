@@ -127,18 +127,18 @@ t_sinfo		*parse_lem(void)
 	{
 		if (ft_strchr(line, '#'))
 		{
-			if (ft_strcmp(line, "##start"))
+			if (!ft_strcmp(line, "##start"))
 				start = 1;
-			else if (ft_strcmp(line, "##end"))
+			else if (!ft_strcmp(line, "##end"))
 				end = 1;
 			continue;
 		}
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
 		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
 		if (start)
-			info->start = room;
+			info->start = id;
 		else if (end)
-			info->end = room;
+			info->end = id;
 		add_node(&root, room, cmp, ins);
 		free(name);
 		free(line);

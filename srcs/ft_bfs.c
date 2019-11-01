@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 19:03:53 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/01 20:10:25 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start)
 		if (cur->cap > cur->flow)
 		{
 			w = graph[cur->id];
-			if (w->mark == -1 && w->id != start)
+			if (cur->cap == 0 && graph[cur->id]->lst->twin)
+				add_qnode(qhead, qtail, graph[cur->id]->lst->twin, q_input);
+			else if (w->mark == -1 && w->id != start)
 			{
 				/*
 				** modernization: stop cycle after finding terminate;

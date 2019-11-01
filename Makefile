@@ -9,14 +9,14 @@ DG_CC_FLAGS= -g -O0
 #
 
 CC= gcc
-CC_FLAGS= -Wall -Wextra -Werror #-Wno-unused-parameter -Wno-unused-function
+CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function
 
 #
 #	Checker release variables
 #
 
 NAME= lem-in
-LIBDIR= libft
+LIBDIR= printf/libft
 LIB= libft.a
 LIBHEADER=libft.h
 GNLHEADER=get_next_line.h

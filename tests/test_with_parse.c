@@ -54,28 +54,19 @@ void		print_info(t_room **rooms, size_t size)
 
 int main(void)
 {
-	int			start;
-	int			end;
-	size_t		size;
-	size_t		ants;
-	t_room		**rooms;
+	t_sinfo		*box;
 	t_path_agr	*paths;
 
 	//t_path_l	*temp = NULL;
 	//t_path_l	*a;
 
-
 	//		***
 	//		***
-	//		5 rooms
 
-	//rooms = create_graph_2(&start, &end, &size);
-	parse(&rooms, &size, &ants);
-	start = 0;
-	end = 1;
+	box = parse_lem();
 	//printf("size: %zu\n", size);
 	//print_info(rooms, size);
-	paths = edm_karp_alg(rooms, start, end, size, ants);
+	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems);
 	//temp = paths->path_l;
 	//while(paths->path_l)
 	//{
@@ -88,6 +79,6 @@ int main(void)
 	print_paths(paths);
 	//release_antsi(paths, end);
 	lem_del_paths(&paths);
-	lem_del_rooms(&rooms, size);
+	lem_del_rooms(&(box->graph), box->size);
 	return (0);
 }
