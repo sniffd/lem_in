@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 16:12:23 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/02 19:43:10 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_ek_info	*init_ek_info(t_room **graph, int end, int cntr)
 	box->path = ft_lstnew(NULL, 0);
 	box->path->content = graph[end];
 	box->i = cntr;
+	box->is_ed_del = 0;
 	return (box);
 }

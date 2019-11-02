@@ -5,8 +5,9 @@ OBJECTS=$(SOURCES:.c=.o)
 
 all: $(NAME)
 	
+## delete werror restore it
 $(NAME):
-	gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(SOURCES)
+	gcc -Wall -Wextra  -I. -c $(SOURCES)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 	ranlib $(NAME)

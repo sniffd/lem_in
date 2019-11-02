@@ -8,8 +8,9 @@ DG_CC_FLAGS= -g -O0
 #	Compiler variables
 #
 
+## ** do not forget comment -Wno ! **
 CC= gcc
-CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function
+CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function -Wno-unused-but-set-parameter
 
 #
 #	Checker release variables
@@ -43,7 +44,7 @@ debug: $(NAME)
 #
 
 $(NAME): $(LIB) $(OBJS)
-	$(CC) $(CC_FLAGS) $(OBJS) -L$(LIBDIR) -l$(LIBSHORT) -o $@
+	$(CC) $(CC_FLAGS) $(OBJS) -o $@ -I$(HEADERDIR) -I$(LIBDIR) -L$(LIBDIR) -l$(LIBSHORT)
 
 $(LIB):
 	cd $(LIBDIR) && $(MAKE) -s

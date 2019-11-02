@@ -77,6 +77,9 @@ int main(void)
 	//}
 	//paths->path_l = temp;
 	print_paths(paths);
+	ft_bfs_clear_all(box->graph, box->size);
+	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems);
+	print_paths(paths);
 	//release_antsi(paths, end);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);

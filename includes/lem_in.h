@@ -47,6 +47,7 @@ typedef struct	s_path_agr
 
 typedef struct	s_ek_info
 {
+	char			is_ed_del;
 	t_room			*par;
 	int				cur;
 	size_t			i;
@@ -94,5 +95,8 @@ void			lem_del_rooms(t_room ***graph, size_t s);
 void			lem_del_tree(t_avlt **tr);
 t_room			**ft_lem_trrtoarr(t_avlt *tr, size_t s);
 void			ek_alg_neg_e(t_room *cur, t_room *par, int start);
+t_rlist  		*find_adj(t_room *cur, int id);
+int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
+void			ft_bfs_clear_all(t_room **graph, size_t s);
 
 #endif

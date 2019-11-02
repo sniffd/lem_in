@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/01 20:36:47 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/02 20:24:21 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lem_in.h"
 #include "avlt.h"
 
-static t_rlist  *find_adj(t_room *cur, int id)
+t_rlist  *find_adj(t_room *cur, int id)
 {
 	t_rlist		*to;
 	t_rlist		*toto;
@@ -56,7 +56,7 @@ static int		dec_flow(t_room *room, int connect)
 
 	if (!(to = find_adj(room, connect)))
 		return (-2);
-	to->flow -= 1;
+	to->flow += 1;
 	return (0);
 }
 
@@ -103,13 +103,15 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 	while(pthagr->dx > 0)
 	{
 		ft_bfs_int(graph, start, end, s);
-		print_infoo(graph, s);
+		print_infoo(graph, s);//
 		printf("\n\n");//
 		if (graph[end]->parent == -1)
 			break;
 		box = init_ek_info(graph, end, 0);
 		while(graph[box->cur]->parent != -1)
 		{
+			if (!ek_alg_del_edg(graph, box))
+			{
 			if (inc_flow(box->par, box->cur) < 0)
 			// if cant find vertex in adjacency list than error do not forget to free box
 			// the same for below dec_flow
@@ -118,6 +120,7 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 				return (NULL);
 			ek_alg_mk_twin(box->par, start);
 			ek_alg_neg_e(graph[box->cur], box->par, start);
+			}
 			box->path = ek_alg_mk_path(box->par, box->path);
 			box->par = next_parent(graph, box->par, &(box->cur));
 			(box->i)++;

@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:42:29 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/01 20:23:26 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:13:31 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ek_alg_mk_twin(t_room *room, int start)
 {
 	t_rlist	*temp;
 
-	if (room->id == start)
+	if (room->id == start || room->lst->twin)
 		return ;
 	temp = room->lst;
 	room->lst = init_rlist(room->id);
