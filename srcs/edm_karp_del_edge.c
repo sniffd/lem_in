@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:43:57 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 02:09:13 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/03 20:57:51 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ static void	find_del_adj(t_room *cur, int id)
 		{
 			if (to == cur->lst)
 			{
-				prev = to->next;
+				cur->lst = cur->lst->next;
 				free(to);
-				to = prev;
+				to = cur->lst;
+				prev = to;
 				continue;
 			}
 			else

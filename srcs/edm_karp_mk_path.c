@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/30 21:37:56 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/03 20:53:11 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_path_l		*ek_alg_mk_path_l(t_path_l *path_l, t_list *path, size_t length)
 	return (path_l);
 }
 
-t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box)
+t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box, int par)
 {
 	int		temp;
 
@@ -48,7 +48,14 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box)
 		temp++;
 	else
 		temp--;
-	if (pagr->dx > temp)
+	if (par)
+	{
+		pagr->dx = temp;
+		pagr->path_l = ek_alg_mk_path_l(pagr->path_l, box->path, box->i);		
+	}
+	else
+	{
+	if (pagr->dx >= temp)
 	{
 		pagr->dx = temp;
 		pagr->path_l = ek_alg_mk_path_l(pagr->path_l, box->path, box->i);
@@ -59,6 +66,7 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box)
 		(pagr->pths)--;
 		pagr->dx = -1;
 		ft_lstdel(&(box->path), del_lst);
+	}
 	}
 	return(pagr);
 }

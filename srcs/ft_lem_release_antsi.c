@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:38:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/29 22:15:36 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/03 20:19:47 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int				release_antsi(t_path_agr *paths, int end)
 				path_l->cap = calc_cap(paths, path_l);
 			if (path_l->cap > path_l->flow)
 				release_antsi_do(&ants_num, path_l, &ants);
+			//printf("\n%d/%d\n", path_l->flow, path_l->cap);
 			path_l = path_l->next;
 		}
 		print_ants(ants);
