@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 21:09:31 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 00:32:33 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ static void	init_arr_bfs(t_room **graph, size_t s)
 	i = 0;
 	while (i < s)
 	{
-		graph[i]->mark = -1;
-		graph[i]->parent = -1;
-		i++;
+		if (graph[i])
+		{
+			graph[i]->mark = -1;
+			graph[i]->parent = -1;
+			i++;
+		}
 	}
 }
 
@@ -78,7 +81,7 @@ static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start)
 				*/
 				w->mark = ((t_room*)(*qhead)->item)->mark + 1;
 				w->parent = ((t_room*)(*qhead)->item)->id;
-				if ((cur->cap == 0 && graph[cur->id]->lst->twin) || (w->lst->twin && w->lst->flow == 0))
+				if ((cur->cap == 0 && graph[cur->id]->lst->twin) || (w->lst->twin && w->lst->flow == 0))					
 					add_qnode(qhead, qtail, graph[cur->id]->lst->twin, q_input);
 				else
 					add_qnode(qhead, qtail, w, q_input);

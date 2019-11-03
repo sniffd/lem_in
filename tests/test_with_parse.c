@@ -30,6 +30,7 @@ void		print_info(t_room **rooms, size_t size)
 {
 	size_t		i;
 	t_rlist 	*list;
+	t_rlist		*tw_list;
 
 	i = 0;
 	printf("General info:\n");
@@ -39,6 +40,20 @@ void		print_info(t_room **rooms, size_t size)
 		printf("parent in room %zu: %d\n", i, rooms[i]->parent);
 		printf("list in room %zu: %p\n", i, rooms[i]->lst);
 		list = rooms[i]->lst;
+		if (list->twin)
+		{
+			tw_list = ((t_room*)list->twin)->lst;
+			printf("--TWIN--\n");
+			while(tw_list)
+			{
+				printf("-->id: %d\n", tw_list->id);
+				printf("-->float: %d\n", tw_list->flow);
+				printf("-->capacity: %d\n", tw_list->cap);
+				printf("-->twin: %p\n", tw_list->twin);
+				tw_list = tw_list->next;
+			}
+			printf("--**--\n");
+		}
 		while(list)
 		{
 			printf("->id: %d\n", list->id);
@@ -69,6 +84,7 @@ int main(void)
 	//printf("size: %zu\n", size);
 	//print_info(rooms, size);
 	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 1);
+	//print_info(box->graph, box->size);
 	print_paths(paths);
 	printf("deleted? :%d\n", err);
 	err = 1;
@@ -76,7 +92,9 @@ int main(void)
 	{
 	err = 0;
 	ft_bfs_clear_all(box->graph, box->size);
+	//print_info(box->graph, box->size);
 	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 1);
+	print_info(box->graph, box->size);
 	print_paths(paths);
 	printf("deleted? :%d\n", err);
 	}
@@ -103,7 +121,7 @@ int main(void)
 	paths->path_l = ah;
 	print_paths(paths);*/
 
-	release_antsi(paths, box->end);
+	//release_antsi(paths, box->end);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
 	return (0);
