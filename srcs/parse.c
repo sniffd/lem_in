@@ -128,9 +128,19 @@ t_sinfo		*parse_lem(void)
 		if (ft_strchr(line, '#'))
 		{
 			if (!ft_strcmp(line, "##start"))
-				start = 1;
+			{
+				if (start || end)
+					return (NULL);
+				else
+					start = 1;
+			}
 			else if (!ft_strcmp(line, "##end"))
-				end = 1;
+			{
+				if (start || end)
+					return (NULL);
+				else
+					end = 1;
+			}
 			continue;
 		}
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
@@ -191,5 +201,10 @@ t_sinfo		*parse_lem(void)
 	info->size = id;
 	info->lems = lems;
 	printf("all\n");
+	if (info->start == 0 || info->end == 0)
+	{
+		free(info);
+		return (NULL);
+	}
 	return (info);
 }
