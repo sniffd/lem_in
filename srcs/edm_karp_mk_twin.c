@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:42:29 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 20:42:54 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:21:57 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@ void		ek_alg_mk_twin(t_room *room, int start)
 {
 	t_rlist	*temp;
 
-	if (room->id == start || room->lst->twin)
+	if (room->id == start)
 		return ;
-	temp = room->lst;
-	room->lst = init_rlist(room->id);
-	room->lst->flow = 1;
-	room->lst->twin = init_room(room->id, "dup", room->x, room->y);
-	((t_room*)(room->lst->twin))->parent = room->id;
-	((t_room*)(room->lst->twin))->lst = temp;
+	if (room->lst->twin)
+		room->lst->flow = 1;
+	else
+	{
+		temp = room->lst;
+		room->lst = init_rlist(room->id);
+		room->lst->flow = 1;
+		room->lst->twin = init_room(room->id, "dup", room->x, room->y);
+		((t_room*)(room->lst->twin))->parent = room->id;
+		((t_room*)(room->lst->twin))->lst = temp;
+	}
 }
 
 static t_rlist	*find_adj_not_tw(t_room *cur, int id)

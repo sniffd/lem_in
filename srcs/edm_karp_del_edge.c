@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:43:57 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 00:42:47 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:08:56 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_rlist	*find_adj_not_tw(t_room *cur, int id)
 	return (NULL);
 }
 
-static void	find_del_adj(t_room *cur, int id)
+void	find_del_adj(t_room *cur, int id)
 {
 	t_rlist		*to;
 	t_rlist		*prev;

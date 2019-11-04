@@ -24,6 +24,7 @@ typedef struct	s_room
 	int				parent;		// parent = -1	at start
 	int				x;			// x = x		at start
 	int				y;			// y = y		at start
+	int				is_in_path;
 	struct	s_rlist	*lst;
 }				t_room;
 
@@ -98,5 +99,6 @@ void			ek_alg_neg_e(t_room *cur, t_room *par, int start);
 t_rlist  		*find_adj(t_room *cur, int id);
 int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
 void			ft_bfs_clear_all(t_room **graph, size_t s);
+void			find_del_adj(t_room *cur, int id);
 
 #endif

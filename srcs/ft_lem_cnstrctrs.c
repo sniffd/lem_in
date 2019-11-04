@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 18:14:35 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:08:34 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_room		*init_room(int id, char *name, int x, int y)
 	room->x = x;
 	room->y = y;
 	room->lst = NULL;
+	room->is_in_path = 0;
 	return (room);
 }
 

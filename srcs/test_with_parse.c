@@ -16,6 +16,7 @@ void		print_paths(t_path_agr *paths)
 		while(path)
 		{
 			printf("%d", ((t_room*)path->content)->id);
+			//printf("%s", ((t_room*)path->content)->name);
 			if (path->next)
 				printf("->");
 			path = path->next;
@@ -83,31 +84,26 @@ int main(void)
 	box = parse_lem();
 	//printf("size: %zu\n", size);
 	//print_info(rooms, size);
-	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 1);
+	//find_del_adj(box->graph[0], 808);
+	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
 	//print_info(box->graph, box->size);
 	print_paths(paths);
-	printf("deleted? :%d\n", err);
-	err = 1;
-	while(err)
-	{
-	err = 0;
-	ft_bfs_clear_all(box->graph, box->size);
-	//print_info(box->graph, box->size);
-	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 1);
-	print_info(box->graph, box->size);
-	print_paths(paths);
-	printf("deleted? :%d\n", err);
-	}
-
+	//printf("deleted? :%d\n", err);
 	err = 1;
 	while(err)
 	{
 	err = 0;
 	ft_bfs_clear_all(box->graph, box->size);
 	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
+	//print_info(box->graph, box->size);
 	print_paths(paths);
-	printf("deleted? :%d\n", err);
+	//printf("deleted? :%d\n", err);
 	}
+	err = 0;
+	ft_bfs_clear_all(box->graph, box->size);
+	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
+	//print_info(box->graph, box->size);
+	print_paths(paths);
 
 	/*ah = NULL;
 	while(paths->path_l)
@@ -121,7 +117,7 @@ int main(void)
 	paths->path_l = ah;
 	print_paths(paths);*/
 
-	//release_antsi(paths, box->end);
+	release_antsi(paths, box->end);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
 	return (0);

@@ -6,13 +6,14 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 00:32:33 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:40:55 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "avlt.h"
 #include "ft_queue.h"
+#include <stdio.h> // printf!
 
 /*
 int		ft_bfs(t_avlt *graph, char *start, char *end)
@@ -81,8 +82,12 @@ static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start)
 				*/
 				w->mark = ((t_room*)(*qhead)->item)->mark + 1;
 				w->parent = ((t_room*)(*qhead)->item)->id;
-				if ((cur->cap == 0 && graph[cur->id]->lst->twin) || (w->lst->twin && w->lst->flow == 0))					
-					add_qnode(qhead, qtail, graph[cur->id]->lst->twin, q_input);
+				if ((cur->cap == 0 && graph[cur->id]->lst->twin) || (w->lst->twin && w->lst->flow == 0))
+				{
+					((t_room*)w->lst->twin)->mark = w->mark;
+					add_qnode(qhead, qtail, w->lst->twin, q_input);
+					add_qnode(qhead, qtail, w, q_input);
+				}
 				else
 					add_qnode(qhead, qtail, w, q_input);
 			}

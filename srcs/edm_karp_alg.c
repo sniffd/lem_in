@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 23:45:39 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 19:10:46 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 {
 	t_ek_info	*box;
 	t_path_agr	*pthagr;
+	int			ab;
 
 	pthagr = init_path_agr(0, ants, 0);
+	ab = (par ? 1 : pthagr->dx);
+	while(ab > 0)
 	//while(pthagr->dx > 0)
-	while(1)
+	//while(1)
 	{
 		ft_bfs_int(graph, start, end, s);
 		if (graph[end]->parent == -1)
@@ -91,7 +94,7 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 			if (dec_flow(graph[box->cur], box->par->id) < 0)
 				return (NULL);
 			ek_alg_mk_twin(box->par, start);
-			//ek_alg_neg_e(graph[box->cur], box->par, start);
+			ek_alg_neg_e(graph[box->cur], box->par, start);
 			}
 			box->path = ek_alg_mk_path(box->par, box->path);
 			box->par = next_parent(graph, box->par, &(box->cur));
@@ -101,6 +104,7 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 		}
 		pthagr = ek_alg_mk_pagr(pthagr, box, par);
 		free(box);
+		ab = (par ? 1 : pthagr->dx);
 	}
 	return (pthagr);
 }

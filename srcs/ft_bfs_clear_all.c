@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 20:28:29 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 00:50:04 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:17:34 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	ft_bfs_clear_all(t_room **graph, size_t s)
 	while (i < s)
 	{
 		if (graph[i])
+		{
 			flow_to_zero(graph[i]);
+			graph[i]->is_in_path = 0;
+		}
 		i++;
 	}
 }
