@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 20:42:32 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/04 23:26:01 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	free_path_connect(t_list *path)
 t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box, int par)
 {
 	int		temp;
+	//static int	hi = 0;
 
 	pagr->L += box->i;
 	(pagr->pths)++;
@@ -75,11 +76,20 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box, int par)
 	}
 	else
 	{
+		/*if (!hi)
+		{
+			pagr->dx = temp;
+			hi += 1;
+		}
+		else
+		{
+		hi = 0;*/
 		pagr->L -= box->i;
 		(pagr->pths)--;
 		pagr->dx = -1;
 		free_path_connect(box->path);
 		ft_lstdel(&(box->path), del_lst);
+		//}
 	}
 	}
 	return(pagr);

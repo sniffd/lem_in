@@ -85,9 +85,9 @@ int main(void)
 	//printf("size: %zu\n", size);
 	//print_info(rooms, size);
 	//find_del_adj(box->graph[0], 808);
-	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
+	//paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
 	//print_info(box->graph, box->size);
-	print_paths(paths);
+	//print_paths(paths);
 	//printf("deleted? :%d\n", err);
 	err = 1;
 	while(err)
