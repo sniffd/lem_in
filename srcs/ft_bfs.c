@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 15:40:55 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/05 23:48:40 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,14 @@ static void	init_arr_bfs(t_room **graph, size_t s)
 	}
 }
 
-static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start)
+static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start, int end)
 {
 	t_rlist		*cur;
 	t_room		*w;
+
+	extern int gl;
+	//end--;
+
 
 	cur = ((t_room*)(*qhead)->item)->lst;
 	while (cur)
@@ -74,6 +78,14 @@ static void	adj_trav(t_room **graph, t_fque **qhead, t_fque **qtail, int start)
 		if (cur->cap > cur->flow)
 		{
 			w = graph[cur->id];
+
+			if (gl < 1 && (w->id == end))
+			{
+				gl += 1;
+				cur = cur->next;
+				printf("hi!\n");
+				continue;
+			}
 			if (w->mark == -1 && w->id != start)
 			{
 				/*
@@ -102,7 +114,14 @@ int			ft_bfs_int(t_room **graph, int start, int end, size_t s)
 	t_fque		*qtail;
 	t_room		*hroom;
 
-	end--;	//
+	extern int gl_2;
+	extern int gl;
+
+	if (gl_2++ < 3)
+	{
+		gl = 0;
+	}
+
 	qhead = NULL;
 	qtail = NULL;
 	init_arr_bfs(graph, s);
@@ -111,7 +130,7 @@ int			ft_bfs_int(t_room **graph, int start, int end, size_t s)
 	add_qnode(&qhead, &qtail, hroom, q_input);
 	while (qhead)
 	{
-		adj_trav(graph, &qhead, &qtail, start);
+		adj_trav(graph, &qhead, &qtail, start, end);
 		del_qnode(&qhead);
 	}
 	return (1);

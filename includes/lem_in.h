@@ -101,4 +101,6 @@ int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
 void			ft_bfs_clear_all(t_room **graph, size_t s);
 void			find_del_adj(t_room *cur, int id);
 
+void		print_paths(t_path_agr *paths); // del it
+
 #endif

@@ -68,6 +68,9 @@ void		print_info(t_room **rooms, size_t size)
 	printf("\n\n");
 }
 
+int gl = 0;
+int gl_2 = 0;
+
 int main(void)
 {
 	t_sinfo		*box;
@@ -92,6 +95,8 @@ int main(void)
 	err = 1;
 	while(err)
 	{
+	gl = 0;
+	gl_2 = 0;
 	err = 0;
 	ft_bfs_clear_all(box->graph, box->size);
 	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
@@ -99,6 +104,8 @@ int main(void)
 	print_paths(paths);
 	//printf("deleted? :%d\n", err);
 	}
+	gl = 0;
+	gl_2 = 0;
 	err = 0;
 	ft_bfs_clear_all(box->graph, box->size);
 	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);

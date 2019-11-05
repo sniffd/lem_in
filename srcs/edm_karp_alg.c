@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 19:31:05 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/05 22:48:24 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_path_agr			*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t 
 				*er = box->is_ed_del;
 		}
 		pthagr = ek_alg_mk_pagr(pthagr, box, par);
+		print_paths(pthagr); // !
 		free(box);
 		ab = (par ? 1 : pthagr->dx);
 	}
