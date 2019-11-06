@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/05 21:06:57 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/06 11:55:14 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box, int par)
 	int		temp;
 	//static int	hi = 0;
 
-	pagr->L += box->i;
+	pagr->len += box->i;
 	(pagr->pths)++;
-	temp = ((pagr->L) + (pagr->ants)) / pagr->pths;
-	if (((pagr->L) + (pagr->ants)) % pagr->pths != 0)
+	temp = ((pagr->len) + (pagr->ants)) / pagr->pths;
+	if (((pagr->len) + (pagr->ants)) % pagr->pths != 0)
 		temp++;
 	else
 		temp--;
@@ -85,7 +85,7 @@ t_path_agr	*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box, int par)
 		else
 		{
 		hi = 0;*/
-		pagr->L -= box->i;
+		pagr->len -= box->i;
 		(pagr->pths)--;
 		pagr->dx = -1;
 		free_path_connect(box->path);

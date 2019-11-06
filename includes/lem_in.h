@@ -39,7 +39,7 @@ typedef struct	s_path_l
 
 typedef struct	s_path_agr
 {
-	size_t			L;
+	size_t			len;
 	size_t			ants;
 	size_t			pths;
 	int				dx;
@@ -60,7 +60,7 @@ typedef struct	s_sinfo
 	int		start;
 	int		end;
 	t_room	**graph;
-	int		lems;
+	size_t	lems;
 	size_t	size;
 }				t_sinfo;
 
@@ -74,8 +74,8 @@ void			*ins(void *ins);
 t_sinfo			*parse_lem(void);
 int				cmp(void *p1, void *p2);
 void			*q_input(void *it);
-int				ft_bfs_int(t_room **graph, int start, int end, size_t s);
-t_path_agr		*edm_karp_alg(t_room **graph, int start, int end, size_t s, size_t ants, int *e, int par);
+t_list			*ft_bfs(t_sinfo *rooms);
+t_path_agr		*edm_karp_alg(t_sinfo *rooms, t_path_agr *pthagr, int *e, int par);
 void			ek_alg_mk_twin(t_room *room, int start);
 t_list			*ek_alg_mk_path(t_room *parent,  t_list *lst);
 t_path_l		*ek_alg_mk_path_l(t_path_l *path_l, t_list *path, size_t length);
@@ -100,6 +100,8 @@ t_rlist  		*find_adj(t_room *cur, int id);
 int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
 void			ft_bfs_clear_all(t_room **graph, size_t s);
 void			find_del_adj(t_room *cur, int id);
+t_list			*ft_rev_lst(t_list *lst);
+t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths);
 
 void		print_paths(t_path_agr *paths); // del it
 

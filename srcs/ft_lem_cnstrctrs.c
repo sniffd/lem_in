@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 14:08:34 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/06 12:51:00 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_path_agr	*init_path_agr(int l, int n, int k)
 
 	pathagr = (t_path_agr*)malloc(sizeof(t_path_agr));
 	pathagr->pths = k;
-	pathagr->L = l;
+	pathagr->len = l;
 	pathagr->ants = n;
 	pathagr->dx = 2147483647;
 	pathagr->path_l = NULL;
