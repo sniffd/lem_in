@@ -145,6 +145,8 @@ t_sinfo		*parse_lem(void)
 		}
 		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
 		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
+		if (get_room(root, name))
+			return (NULL);
 		if (start)
 			info->start = id;
 		else if (end)
@@ -167,6 +169,8 @@ t_sinfo		*parse_lem(void)
 		if (*line != '#')
 		{
 			link = ft_strsplit(line, '-');
+			if (!(link[1]) || link[2] || !(get_room(root, link[0]) && get_room(root, link[1])))
+				return (NULL);
 			room_one = get_room(root, link[0]);
 			graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
