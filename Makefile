@@ -10,7 +10,7 @@ DG_CC_FLAGS= -g -O0
 
 ## ** do not forget comment -Wno ! **
 CC= gcc
-CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function #-Wno-unused-but-set-parameter
+CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function -Wno-unused-but-set-parameter
 
 #
 #	Checker release variables

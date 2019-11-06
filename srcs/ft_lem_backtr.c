@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:30:23 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/06 19:05:34 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 00:48:38 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ static void			fill_graph_wpths(t_sinfo *rooms, t_path_agr *paths)
 
 static t_path_agr	*clean_pathagr(t_path_agr *paths, t_path_agr *tp_pths, size_t this_k, size_t this_len)
 {
-	t_list		*path;
-	t_list		*temp;
-	t_path_l	*tempp;
+	t_path_l	*pathl;
+	/*t_path_l	*temp;
 	size_t		cntr;
 
 	temp = NULL;
@@ -57,15 +56,26 @@ static t_path_agr	*clean_pathagr(t_path_agr *paths, t_path_agr *tp_pths, size_t 
 		(paths->len)--;
 		(paths->path_l->len)--;
 	}
-	//reverse list?
-	if (paths->path_l->len == 0)
+	//reverse list?*/
+	while(this_k < paths->pths)
+	{
+		pathl = paths->path_l;
+		paths->path_l = paths->path_l->next;
+		pathl->next = tp_pths->path_l;
+		tp_pths->path_l = pathl;
+		(tp_pths->pths)++;
+		(paths->pths)--;
+		paths->len = paths->len - tp_pths->path_l->len;
+	}
+	paths->dx = 2147483647;
+	/*if (paths->path_l->len == 0)
 	{
 		tempp = paths->path_l;
 		paths->path_l = paths->path_l->next;
 		free(tempp);
 	}
 	tp_pths->path_l = ek_alg_mk_path_l(tp_pths->path_l, path, cntr);
-	tp_pths->len += cntr;
+	tp_pths->len += cntr;*/
 	return (tp_pths);
 }
 
@@ -106,15 +116,20 @@ t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths)
 		er = 0;
 		ft_bfs_clear_all(rooms->graph, rooms->size);
 		fill_graph_wpths(rooms, paths);
+		ft_bfs(rooms);
 		//print_info(rooms->graph, rooms->size);
+		printf("->in\n");//!
 		if ((paths = edm_karp_alg(rooms, paths, &er, 0)))
 		{
+			printf("->out\n");//
 			print_paths(paths); // !
 			temp_paths = clean_pathagr(paths, temp_paths, this_k, this_len);
+			printf("after!\n");//
+			print_paths(paths); // !
 		}
 			//print_paths(temp_paths); // !
 	}
 	lem_del_paths(&temp_paths);
-	ft_lstdel(&end_prns, del_lst);
+	ft_lstdel(&tmp, del_lst);
 	return (paths);
 }
