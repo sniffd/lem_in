@@ -6,12 +6,13 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/06 13:06:25 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/06 18:08:21 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "avlt.h"
+#include <stdio.h> // printf!
 
 t_rlist  *find_adj(t_room *cur, int id)
 {
@@ -38,7 +39,7 @@ t_rlist  *find_adj(t_room *cur, int id)
 	return (NULL);
 }
 
-static int		inc_flow(t_room *room, int connect)
+int		inc_flow(t_room *room, int connect)
 {
 	t_rlist		*to;
 	
@@ -48,7 +49,7 @@ static int		inc_flow(t_room *room, int connect)
 	return (0);
 }
 
-static int		dec_flow(t_room *room, int connect)
+int		dec_flow(t_room *room, int connect)
 {
 
 	t_rlist		*to;
@@ -92,6 +93,10 @@ t_path_agr			*edm_karp_alg(t_sinfo *rooms, t_path_agr *pthagr, int *er, int par)
 				*er = box->is_ed_del;
 		}
 		pthagr = ek_alg_mk_pagr(pthagr, box, par);
+		printf("-->check_paths<--\n");//!
+		print_paths(pthagr); // !
+		printf("-->end<--\n\n");//!
 		free(box);
+		ft_lem_back(rooms, pthagr);
 	return (pthagr);
 }

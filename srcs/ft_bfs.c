@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/06 14:19:15 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/06 17:05:43 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_list				*ft_bfs(t_sinfo *rooms)
 	add_qnode(&qhead, &qtail, hroom, q_input);
 	while (qhead)
 	{
+		if (((t_room*)qhead->item)->id != rooms->end)
 		adj_trav(rooms, &qhead, &qtail, &end_par);
 		del_qnode(&qhead);
 	}

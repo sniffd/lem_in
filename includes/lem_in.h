@@ -102,7 +102,10 @@ void			ft_bfs_clear_all(t_room **graph, size_t s);
 void			find_del_adj(t_room *cur, int id);
 t_list			*ft_rev_lst(t_list *lst);
 t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths);
+int				inc_flow(t_room *room, int connect);
+int				dec_flow(t_room *room, int connect);
 
 void		print_paths(t_path_agr *paths); // del it
+void		print_info(t_room **rooms, size_t size);
 
 #endif
