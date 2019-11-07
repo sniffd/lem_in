@@ -243,6 +243,7 @@ t_sinfo		*parse_lem(void)
 			parse_links(line, root, info, &start, &end);
 		f = get_next_line(0, &line);
 	}
+	post_order(root, appt_adj);
 	info->size = id;
 	ft_printf("all\n");
 	if (info->start == -1 || info->end == -1 || !(start && end))
