@@ -128,6 +128,8 @@ t_sinfo		*parse_lem(void)
 	}
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
+		if (*line == '\0')
+			return (NULL);
 		if (*line == '#')
 		{
 			if (!ft_strcmp(line, "##start"))
@@ -180,6 +182,8 @@ t_sinfo		*parse_lem(void)
 	}
 	while (ret && line && *line)
 	{
+		if (*line == '\0')
+			return (NULL);
 		if (*line != '#')
 		{
 			link = ft_strsplit(line, '-');
