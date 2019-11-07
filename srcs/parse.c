@@ -125,6 +125,32 @@ int			check_command(char *line, char *start, char *end, t_sinfo *info)
 	return (1);
 }
 
+void		check_coord(char *line, char ***link, int *f)
+{
+	*link = ft_strsplit(line, ' ');
+	if (*line == '\0' || !(*link)[0] || !(*link)[1] || !(*link)[2] || (*link)[3])
+		error();
+	atoi_lem_in(&((*link)[1]), f);
+	atoi_lem_in(&((*link)[2]), f);
+	if (link[1][0] != '\0' || link[2][0] != '\0' || *f)
+		error();
+}
+
+void		add_link(t_room *room_one, t_room *room_two)
+{
+	t_rlist	*tmp;
+
+	if (!(room_one->lst))
+		room_one->lst = init_rlist(room_two->id);
+	else
+	{
+		tmp = room_one->lst;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = init_rlist(room_two->id);
+	}
+}
+
 t_sinfo		*parse_lem(void)
 {
 	char	*line;
@@ -150,30 +176,24 @@ t_sinfo		*parse_lem(void)
 	start = 0;
 	end = 0;
 	if (!(info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
-		return (NULL);
+		error();
 	info->start = -1;
 	info->end = -1;
 	if (get_next_line(0, &line) <= 0)
-		return (NULL);
+		error();
 	name = line;
 	info->lems = atoi_lem_in(&name, &f);
 	if (*name != '\0' || info->lems <= 0 || f)
-		return (NULL);
+		error();
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
 		if (*line == '#' && check_command(line, &start, &end, info))
 			continue;
-		link = ft_strsplit(line, ' ');
-		if (*line == '\0' || !link[0] || !link[1] || !link[2] || link[3])
-			return (NULL);
-		atoi_lem_in(&(link[1]), &f);
-		atoi_lem_in(&(link[2]), &f);
-		if (link[1][0] != '\0' || link[2][0] != '\0' || f)
-			return (NULL);
+		check_coord(line, &link, &f);
 		name = ft_memalloc(ft_strlen(link[0]) + 1);
 		room = init_room(id, ft_memcpy(name, line, ft_strlen(link[0])), 0, 0);
 		if (get_room(root, name))
-			return (NULL);
+			error();
 		if (start)
 			info->start = id;
 		else if (end)
@@ -197,43 +217,24 @@ t_sinfo		*parse_lem(void)
 		if (*line != '#')
 		{
 			link = ft_strsplit(line, '-');
-			if (!(link[1]) || link[2] || !(get_room(root, link[0]) && get_room(root, link[1])))
-				return (NULL);
+			if (!(link[1]) || link[2] || !(get_room(root, link[0]) && get_room(root, link[1])) || link[0] == link[1])
+				error();
 			room_one = get_room(root, link[0]);
 			info->graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
 			info->graph[room_two->id] = room_two;
-			if (room_one == room_two)
-				return (NULL);
 			if (room_one->id == info->start || room_two->id == info->start)
 				start = 1;
 			if (room_one->id == info->end || room_two->id == info->end)
 				end = 1;
-			if (!(room_one->lst))
-				room_one->lst = init_rlist(room_two->id);
-			else
-			{
-				tmp = room_one->lst;
-				while (tmp->next)
-					tmp = tmp->next;
-				tmp->next = init_rlist(room_two->id);
-			}
-			if (!(room_two->lst))
-				room_two->lst = init_rlist(room_one->id);
-			else
-			{
-				tmp = room_two->lst;
-				while (tmp->next)
-					tmp = tmp->next;
-				tmp->next = init_rlist(room_one->id);
-			}
+			add_link(room_one, room_two);
+			add_link(room_two, room_one);
 			free_arr(link);
 		}
 		ret = get_next_line(0, &line);
 	}
 	info->size = id;
 	ft_printf("all\n");
-	post_order(root, appt_adj);
 	if (info->start == -1 || info->end == -1 || !(start && end))
 		return (NULL);
 	return (info);
