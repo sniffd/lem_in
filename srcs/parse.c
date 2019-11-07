@@ -125,8 +125,7 @@ t_sinfo		*parse_lem(void)
 		free(info);
 		return (NULL);
 	}
-	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
-	while (get_next_line(0, &line) > 0 && line)
+	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
 		if (*line == '#')
 		{
@@ -213,7 +212,7 @@ t_sinfo		*parse_lem(void)
 	}
 	info->size = id;
 	printf("all\n");
-	if (info->start == 0 || info->end == 0)
+	if (info->start == -1 || info->end == -1)
 	{
 		free(info);
 		return (NULL);
