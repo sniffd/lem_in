@@ -225,6 +225,7 @@ t_sinfo		*parse_lem(void)
 	}
 	info->size = id;
 	ft_printf("all\n");
+	post_order(root, appt_adj);
 	if (info->start == -1 || info->end == -1 || !(start && end))
 	{
 		free(info);

@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:19:03 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/30 18:32:29 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:18:03 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ void	lem_del_rooms(t_room ***graph, size_t s)
 		return ;
 	while (i < s)
 	{
-		lem_del_rlist((*graph)[i]->lst);
-		free((*graph)[i]->name);
-		free((*graph)[i]);
+		if ((*graph)[i])
+		{
+			lem_del_rlist((*graph)[i]->lst);
+			free((*graph)[i]->name);
+			free((*graph)[i]);
+		}
 		i++;
 	}
 	free(*graph);

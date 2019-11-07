@@ -43,7 +43,7 @@ void		print_info(t_room **rooms, size_t size)
 	printf("\n\n");
 }
 
-int g_fl = 4; // 1 - easy dg 10 - hard dg 11 - together 100 - print num
+int g_fl = 2; // 1 - easy dg 10 - hard dg 11 - together 100 - print num
 
 int main(void)
 {
@@ -53,7 +53,10 @@ int main(void)
 	int			stra_num = 0;
 
 	if (!(box = parse_lem()))
+	{
+		write(2, "ERROR\n", 6);
 		return (0);
+	}
 	ft_lem_log("finding paths...\n", 0, 2, 0);
 	err = 1;
 	while(err)
@@ -61,11 +64,16 @@ int main(void)
 		err = 0;
 		ft_bfs_clear_all(box);
 		ft_lem_log("starting edm_karp...\n", 1, 2, 1);
-		paths = edm_karp_alg(box, &err);
+		if (!(paths = edm_karp_alg(box, &err)))
+			break ;
 		ft_lem_log("finish edm_karp.\n", 1, 2, 1);
 		print_paths(paths);
 		if (err)
 			lem_del_paths(&paths);
+	}
+	if (paths && !(paths->path_l))
+	{
+		write(2, "ERROR\n", 6);
 	}
 	//err = 0;
 	//ft_bfs_clear_all(box);
@@ -73,10 +81,12 @@ int main(void)
 	//paths = edm_karp_alg(box, &err);
 	//ft_lem_log("finish edm_karp.\n", 1, 2, 1);
 	//print_paths(paths);
-
-	ft_lem_log("releasing ants...\n", 3, 2, 1);
-	release_antsi(paths, box->end, &stra_num);
-	print_lems(stra_num);
+	if (paths && paths->path_l)
+	{
+		ft_lem_log("releasing ants...\n", 3, 2, 1);
+		release_antsi(paths, box->end, &stra_num);
+		print_lems(stra_num);
+	}
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
 	return (0);

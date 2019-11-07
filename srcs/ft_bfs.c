@@ -6,13 +6,14 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:20:42 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/07 14:08:56 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:16:04 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "avlt.h"
 #include "ft_queue.h"
+#include <stdio.h>
 
 static void	init_arr_bfs(t_room **graph, size_t s)
 {
@@ -25,8 +26,8 @@ static void	init_arr_bfs(t_room **graph, size_t s)
 		{
 			graph[i]->mark = -1;
 			graph[i]->parent = -1;
-			i++;
 		}
+		i++;
 	}
 }
 
