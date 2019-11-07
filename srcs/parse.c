@@ -195,6 +195,8 @@ t_sinfo		*parse_lem(void)
 			info->graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
 			info->graph[room_two->id] = room_two;
+			if (room_one == room_two)
+				return (NULL);
 			if (room_one->id == info->start || room_two->id == info->start)
 				start = 1;
 			if (room_one->id == info->end || room_two->id == info->end)
