@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/06 22:07:16 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 12:29:54 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_path_agr			*edm_karp_alg(t_sinfo *rooms, t_path_agr *pthagr, int *er, int par)
 		//print_paths(pthagr); // !
 		//("-->end<--\n\n");//!
 		free(box);
-		if (pthagr->dx != -1)
-			ft_lem_back(rooms, pthagr);
+		//if (pthagr->dx != -1)
+		//	ft_lem_back(rooms, pthagr);
 	return (pthagr);
 }

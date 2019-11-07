@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:30:23 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/07 00:48:38 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 11:14:16 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ static t_path_agr	*clean_pathagr(t_path_agr *paths, t_path_agr *tp_pths, size_t 
 	return (tp_pths);
 }
 
-static void			chnge_end_parent(t_sinfo *rooms, t_list **end_prns)
+static void			chnge_end_parent(t_sinfo *rooms, t_list *end_prns)
 {
-	rooms->graph[rooms->end]->parent = (*end_prns)->content_size;
-	*end_prns = (*end_prns)->next;
+	rooms->graph[rooms->end]->parent = end_prns->content_size;
 }
 
 t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths)
@@ -112,11 +111,11 @@ t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths)
 	this_k = paths->pths;
 	while (end_prns)
 	{
-		chnge_end_parent(rooms, &end_prns);
 		er = 0;
 		ft_bfs_clear_all(rooms->graph, rooms->size);
 		fill_graph_wpths(rooms, paths);
 		ft_bfs(rooms);
+		chnge_end_parent(rooms, end_prns);
 		//print_info(rooms->graph, rooms->size);
 		printf("->in\n");//!
 		if ((paths = edm_karp_alg(rooms, paths, &er, 0)))
@@ -124,9 +123,11 @@ t_path_agr		*ft_lem_back(t_sinfo *rooms, t_path_agr *paths)
 			printf("->out\n");//
 			print_paths(paths); // !
 			temp_paths = clean_pathagr(paths, temp_paths, this_k, this_len);
+			printf("current par: %zu\n", end_prns->content_size);
 			printf("after!\n");//
 			print_paths(paths); // !
 		}
+		end_prns = end_prns->next;
 			//print_paths(temp_paths); // !
 	}
 	lem_del_paths(&temp_paths);
