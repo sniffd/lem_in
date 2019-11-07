@@ -134,9 +134,11 @@ add_executable(lem_in
 		printf/xflags.c
 		srcs/avlt_services.c
 		srcs/edm_karp_alg.c
+		srcs/edm_karp_del_edge.c
 		srcs/edm_karp_mk_path.c
 		srcs/edm_karp_mk_twin.c
 		srcs/ft_bfs.c
+		srcs/ft_bfs_clear_all.c
 		srcs/ft_lem_cnstrctrs.c
 		srcs/ft_lem_free.c
 		srcs/ft_lem_release_antsi.c
