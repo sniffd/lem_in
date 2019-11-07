@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "lem_in.h"
+#include "ft_printf.h"
 
 static int	pres(char **str, int *f)
 {
@@ -66,7 +66,7 @@ void		appt(void *aa)      // for tree printing
 	t_room *a;
 
 	a = aa;
-	printf("name: %s\n", a->name);
+	ft_printf("name: %s\n", a->name);
 }
 
 void		appt_adj(void *aa)      // for tree printing
@@ -76,16 +76,16 @@ void		appt_adj(void *aa)      // for tree printing
 
 	a = aa;
 	adj = a->lst;
-	printf("->node: %s", a->name);
-	printf("-->list: ");
+	ft_printf("->node: %s", a->name);
+	ft_printf("-->list: ");
 	while (adj)
 	{
-		printf("%d", adj->id);
+		ft_printf("%d", adj->id);
 		if (adj->next)
-			printf(" ");
+			ft_printf(" ");
 		adj = adj->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 t_sinfo		*parse_lem(void)
@@ -212,7 +212,7 @@ t_sinfo		*parse_lem(void)
 		ret = get_next_line(0, &line);
 	}
 	info->size = id;
-	printf("all\n");
+	ft_printf("all\n");
 	if (info->start == -1 || info->end == -1)
 	{
 		free(info);
