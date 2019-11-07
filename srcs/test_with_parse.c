@@ -52,7 +52,8 @@ int main(void)
 	int		err = 0;
 	int			stra_num = 0;
 
-	box = parse_lem();
+	if (!(box = parse_lem()))
+		return (0);
 	ft_lem_log("finding paths...\n", 0, 2, 0);
 	err = 1;
 	while(err)
