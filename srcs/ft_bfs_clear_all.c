@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 20:28:29 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 14:17:34 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 14:47:28 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		flow_to_zero(t_room *room)
 	t_rlist	*adj;
 
 	adj = room->lst;
-	while(adj)
+	while (adj)
 	{
 		adj->flow = 0;
 		if (adj->twin)
@@ -28,17 +28,17 @@ static void		flow_to_zero(t_room *room)
 	}
 }
 
-void	ft_bfs_clear_all(t_room **graph, size_t s)
+void			ft_bfs_clear_all(t_sinfo *rooms)
 {
 	size_t		i;
 
 	i = 0;
-	while (i < s)
+	while (i < rooms->size)
 	{
-		if (graph[i])
+		if (rooms->graph[i])
 		{
-			flow_to_zero(graph[i]);
-			graph[i]->is_in_path = 0;
+			flow_to_zero(rooms->graph[i]);
+			rooms->graph[i]->is_in_path = 0;
 		}
 		i++;
 	}

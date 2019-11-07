@@ -10,7 +10,7 @@ DG_CC_FLAGS= -g -O0
 
 ## ** do not forget comment -Wno ! **
 CC= gcc
-CC_FLAGS= -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function -Wno-unused-but-set-parameter
+CC_FLAGS= -Wall -Wextra -Werror
 
 #
 #	Checker release variables
@@ -20,9 +20,13 @@ NAME= lem-in
 LIBDIR= printf/libft
 LIB= libft.a
 LIBHEADER=libft.h
+LIBPFDIR= printf
+LIBPF= libftprintf.a
+LIBPFHEADER=libftprintf.h
 GNLHEADER=get_next_line.h
 AVLTHEADER=avlt.h
 LIBSHORT= ft
+LIBPFSHORT= ftprintf
 HEADERDIR= includes
 SRCSDIR= srcs
 HEADER= lem_in.h
@@ -43,11 +47,14 @@ debug: $(NAME)
 #	Release
 #
 
-$(NAME): $(LIB) $(OBJS)
-	$(CC) $(CC_FLAGS) $(OBJS) -o $@ -I$(HEADERDIR) -I$(LIBDIR) -L$(LIBDIR) -l$(LIBSHORT)
+$(NAME): $(LIB) $(LIBPF) $(OBJS)
+	$(CC) $(CC_FLAGS) $(OBJS) -o $@ -I$(HEADERDIR) -I$(LIBDIR) -I$(LIBPFDIR) -L$(LIBDIR) -l$(LIBSHORT) -L$(LIBPFDIR) -l$(LIBPFSHORT)
 
 $(LIB):
 	cd $(LIBDIR) && $(MAKE) -s
+
+$(LIBPF):
+	cd $(LIBPFDIR) && $(MAKE) -s
 
 $(OBJS): $(OBJSDIR)/%.o : $(SRCSDIR)/%.c $(HEADERDIR)/$(HEADER)
 	mkdir -p objs

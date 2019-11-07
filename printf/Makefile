@@ -8,7 +8,7 @@ all: $(NAME)
 $(NAME):
 	make -C libft
 	cp libft/libft.a libftprintf.a
-	gcc -Wall -Wextra -Werror -c $(SRC) -Ift_printf.h -Ilibft/libft.h
+	gcc -Wall -Wextra -Werror -c $(SRC) -I. -Ilibft
 	ar -r $@ $(OBJ)
 	ranlib $@
 fclean: clean

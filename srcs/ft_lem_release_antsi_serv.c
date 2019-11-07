@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 22:05:00 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/03 18:14:13 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 18:38:10 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void		release_antsi_do(size_t *ants_num, t_path_l *path_l, t_list **ants)
 	(*ants_num)++;
 }
 
-void		release_antsi_pr_end(t_list *ants, int end)
+void		release_antsi_pr_end(t_list *ants, int end, int *stra_num)
 {
 	while (ants)
 	{
 		move_ants(&ants, end);
 		if (ants)
-			print_ants(ants);
+			print_ants(ants, stra_num);
 	}
 }
