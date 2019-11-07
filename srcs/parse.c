@@ -96,14 +96,12 @@ t_sinfo		*parse_lem(void)
 	char	start;
 	char	end;
 	int		f;
-	int		lems;
 	int		id;
 	int		ret;
 	t_avlt	*root;
 	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
-	t_room	**graph;
 	t_rlist	*tmp;
 	t_sinfo	*info;
 
@@ -114,12 +112,15 @@ t_sinfo		*parse_lem(void)
 	ret = 1;
 	start = 0;
 	end = 0;
+	if (!(info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
+		return (NULL);
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
-	lems = atoi_lem_in(&line, &f);
-	if (*line != '\0' || lems <= 0 || f)
+	info->lems = atoi_lem_in(&line, &f);
+	if (*line != '\0' || info->lems <= 0 || f)
 	{
 		free(line);
+		free(info);
 		return (NULL);
 	}
 	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
@@ -158,12 +159,12 @@ t_sinfo		*parse_lem(void)
 		end = 0;
 		id++;
 	}
-
-	printf("\n\n->Current tree content: \n");
-	post_order(root, appt); // just for test
-
-	graph = (t_room**)malloc(sizeof(t_room*) * id);
-
+	if (!(info->graph = (t_room**)ft_memalloc(sizeof(t_room*) * id)))
+	{
+		free(line);
+		free(info);
+		return (NULL);
+	}
 	while (ret && line && *line)
 	{
 		if (*line != '#')
@@ -172,9 +173,9 @@ t_sinfo		*parse_lem(void)
 			if (!(link[1]) || link[2] || !(get_room(root, link[0]) && get_room(root, link[1])))
 				return (NULL);
 			room_one = get_room(root, link[0]);
-			graph[room_one->id] = room_one;
+			info->graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
-			graph[room_two->id] = room_two;
+			info->graph[room_two->id] = room_two;
 			if (!(room_one->lst))
 				room_one->lst = init_rlist(room_two->id);
 			else
@@ -197,13 +198,7 @@ t_sinfo		*parse_lem(void)
 		}
 		ret = get_next_line(0, &line);
 	}
-
-	printf("->Current tree content with adjacency: \n");
-	post_order(root, appt_adj); // just for test
-
-	info->graph = graph;
 	info->size = id;
-	info->lems = lems;
 	printf("all\n");
 	if (info->start == 0 || info->end == 0)
 	{
