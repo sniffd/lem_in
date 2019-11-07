@@ -132,7 +132,7 @@ void		check_coord(char *line, char ***link, int *f)
 		error();
 	atoi_lem_in(&((*link)[1]), f);
 	atoi_lem_in(&((*link)[2]), f);
-	if (link[1][0] != '\0' || link[2][0] != '\0' || *f)
+	if ((*link)[1][0] != '\0' || (*link)[2][0] != '\0' || *f)
 		error();
 }
 
