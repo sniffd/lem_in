@@ -114,6 +114,8 @@ t_sinfo		*parse_lem(void)
 	end = 0;
 	if (!(info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
 		return (NULL);
+	info->start = -1;
+	info->end = -1;
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
 	info->lems = atoi_lem_in(&line, &f);
@@ -124,28 +126,39 @@ t_sinfo		*parse_lem(void)
 		return (NULL);
 	}
 	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
-	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
+	while (get_next_line(0, &line) > 0 && line)
 	{
-		if (ft_strchr(line, '#'))
+		if (*line == '#')
 		{
 			if (!ft_strcmp(line, "##start"))
 			{
-				if (start || end)
+				if (start || end || info->start >= 0)
 					return (NULL);
 				else
 					start = 1;
 			}
 			else if (!ft_strcmp(line, "##end"))
 			{
-				if (start || end)
+				if (start || end || info->end >= 0)
 					return (NULL);
 				else
 					end = 1;
 			}
 			continue;
 		}
-		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
-		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
+		link = ft_strsplit(line, ' ');
+		if (!link[0] || !link[1] || !link[2] || link[3])
+		{
+			return (NULL);
+		}
+		atoi_lem_in(&(link[1]), &f);
+		atoi_lem_in(&(link[2]), &f);
+		if (link[1][0] != '\0' || link[2][0] != '\0' || f)
+		{
+			return (NULL);
+		}
+		name = ft_memalloc(ft_strlen(link[0]) + 1);
+		room = init_room(id, ft_memcpy(name, line, ft_strlen(link[0])), 0, 0);
 		if (get_room(root, name))
 			return (NULL);
 		if (start)
