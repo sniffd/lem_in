@@ -6,14 +6,14 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:42:29 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 14:21:57 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 14:38:20 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "avlt.h"
 
-void		ek_alg_mk_twin(t_room *room, int start)
+void			ek_alg_mk_twin(t_room *room, int start)
 {
 	t_rlist	*temp;
 
@@ -37,7 +37,7 @@ static t_rlist	*find_adj_not_tw(t_room *cur, int id)
 	t_rlist		*to;
 
 	to = cur->lst;
-	while(to)
+	while (to)
 	{
 		if (to->id == id)
 			return (to);
@@ -46,7 +46,7 @@ static t_rlist	*find_adj_not_tw(t_room *cur, int id)
 	return (NULL);
 }
 
-void		ek_alg_neg_e(t_room *cur, t_room *par, int start)
+void			ek_alg_neg_e(t_room *cur, t_room *par, int start)
 {
 	t_rlist	*temp;
 	t_rlist	*to;
@@ -56,7 +56,7 @@ void		ek_alg_neg_e(t_room *cur, t_room *par, int start)
 	temp = cur->lst;
 	if (!(to = find_adj_not_tw(cur, par->id)))
 	{
-		while(temp->next)
+		while (temp->next)
 			temp = temp->next;
 		temp->next = init_rlist(par->id);
 		temp->next->cap = 0;

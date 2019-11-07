@@ -2,31 +2,6 @@
 #include <stdio.h>
 #include "lem_in.h"
 
-void		print_paths(t_path_agr *paths)
-{
-	t_list		*path;
-	t_path_l	*path_list;
-
-	path_list = paths->path_l;
-	printf("Paths: \n");
-	while(path_list)
-	{
-		path = path_list->path;
-		printf("size: %zu\n", path_list->len);
-		while(path)
-		{
-			printf("%d", ((t_room*)path->content)->id);
-			//printf("%s", ((t_room*)path->content)->name);
-			if (path->next)
-				printf("->");
-			path = path->next;
-		}
-		printf("\n");
-		path_list = path_list->next;
-	}
-	printf("\n\n");
-}
-
 void		print_info(t_room **rooms, size_t size)
 {
 	size_t		i;
@@ -68,56 +43,39 @@ void		print_info(t_room **rooms, size_t size)
 	printf("\n\n");
 }
 
+int g_fl = 4; // 1 - easy dg 10 - hard dg 11 - together 100 - print num
+
 int main(void)
 {
 	t_sinfo		*box;
 	t_path_agr	*paths;
 	int		err = 0;
-
-	//t_path_l	*temp;
-	//t_path_l	*a;
-	//t_path_l	*ah;
-
-	//		***
-	//		***
+	int			stra_num = 0;
 
 	box = parse_lem();
-	//printf("size: %zu\n", size);
-	//print_info(rooms, size);
-	//find_del_adj(box->graph[0], 808);
-	//paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
-	//print_info(box->graph, box->size);
-	//print_paths(paths);
-	//printf("deleted? :%d\n", err);
+	ft_lem_log("finding paths...\n", 0, 2, 0);
 	err = 1;
 	while(err)
 	{
-	err = 0;
-	ft_bfs_clear_all(box->graph, box->size);
-	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
-	//print_info(box->graph, box->size);
-	print_paths(paths);
-	//printf("deleted? :%d\n", err);
+		err = 0;
+		ft_bfs_clear_all(box);
+		ft_lem_log("starting edm_karp...\n", 1, 2, 1);
+		paths = edm_karp_alg(box, &err);
+		ft_lem_log("finish edm_karp.\n", 1, 2, 1);
+		print_paths(paths);
+		if (err)
+			lem_del_paths(&paths);
 	}
-	err = 0;
-	ft_bfs_clear_all(box->graph, box->size);
-	paths = edm_karp_alg(box->graph, box->start, box->end, box->size, box->lems, &err, 0);
-	//print_info(box->graph, box->size);
-	print_paths(paths);
+	//err = 0;
+	//ft_bfs_clear_all(box);
+	//ft_lem_log("starting edm_karp...\n", 1, 2, 1);
+	//paths = edm_karp_alg(box, &err);
+	//ft_lem_log("finish edm_karp.\n", 1, 2, 1);
+	//print_paths(paths);
 
-	/*ah = NULL;
-	while(paths->path_l)
-	{
-		temp = paths->path_l->next;
-		a = paths->path_l;
-		a->next = ah;
-		ah = a;
-		paths->path_l = temp;
-	}
-	paths->path_l = ah;
-	print_paths(paths);*/
-
-	release_antsi(paths, box->end);
+	ft_lem_log("releasing ants...\n", 3, 2, 1);
+	release_antsi(paths, box->end, &stra_num);
+	print_lems(stra_num);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
 	return (0);

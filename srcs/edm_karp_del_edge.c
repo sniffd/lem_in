@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:43:57 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 16:08:56 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/07 14:43:21 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_rlist	*find_adj_not_tw(t_room *cur, int id)
 	t_rlist		*to;
 
 	to = cur->lst;
-	while(to)
+	while (to)
 	{
 		if (to->id == id)
 			return (to);
@@ -26,23 +26,28 @@ static t_rlist	*find_adj_not_tw(t_room *cur, int id)
 	return (NULL);
 }
 
-void	find_del_adj(t_room *cur, int id)
+static void		del_adj(t_room *cur, t_rlist **to, t_rlist **prev)
+{
+	cur->lst = cur->lst->next;
+	free(*to);
+	*to = cur->lst;
+	*prev = *to;
+}
+
+void			find_del_adj(t_room *cur, int id)
 {
 	t_rlist		*to;
 	t_rlist		*prev;
 
 	to = cur->lst;
 	prev = to;
-	while(to)
+	while (to)
 	{
 		if (to->id == id)
 		{
 			if (to == cur->lst)
 			{
-				cur->lst = cur->lst->next;
-				free(to);
-				to = cur->lst;
-				prev = to;
+				del_adj(cur, &to, &prev);
 				continue;
 			}
 			else
@@ -58,7 +63,7 @@ void	find_del_adj(t_room *cur, int id)
 	}
 }
 
-int			ek_alg_del_edg(t_room **graph, t_ek_info *box)
+int				ek_alg_del_edg(t_room **graph, t_ek_info *box)
 {
 	t_rlist		*temp;
 	t_room		*cur;
