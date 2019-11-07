@@ -98,12 +98,15 @@ void		error(void)
 
 void		free_arr(char **ar)
 {
-	while (*ar)
+	char	**tmp;
+
+	tmp = ar;
+	while (*ar && **ar != '\0')
 	{
 		free(*ar);
 		ar++;
 	}
-	free(ar);
+	free(tmp);
 }
 
 int			check_command(char *line, char *start, char *end, t_sinfo *info)
