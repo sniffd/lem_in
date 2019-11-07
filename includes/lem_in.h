@@ -61,6 +61,19 @@ typedef struct	s_sinfo
 	size_t	size;
 }				t_sinfo;
 
+typedef	struct	s_vars
+{
+	char	*line;
+	char	**link;
+	char	start;
+	char	end;
+	int		f;
+	int		id;
+	t_avlt	*root;
+	t_room	*room;
+	t_sinfo	*info;
+}				t_vars;
+
 t_room			*init_room(int id, char *name, int x, int y);
 t_rlist			*init_rlist(int id);
 t_path_agr		*init_path_agr(int l, int n, int k);
