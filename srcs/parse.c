@@ -238,6 +238,7 @@ t_sinfo		*parse_lem(void)
 		vars->f = get_next_line(0, &(vars->line));
 	}
 	vars->info->size = vars->id;
+	post_order(vars->root, appt_adj);
 	ft_printf("all\n");
 	if (vars->info->start == -1 || vars->info->end == -1 || !(vars->start && vars->end))
 		error();
