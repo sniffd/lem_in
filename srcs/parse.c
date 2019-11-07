@@ -118,8 +118,9 @@ t_sinfo		*parse_lem(void)
 	info->end = -1;
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
-	info->lems = atoi_lem_in(&line, &f);
-	if (*line != '\0' || info->lems <= 0 || f)
+	name = line;
+	info->lems = atoi_lem_in(&name, &f);
+	if (*name != '\0' || info->lems <= 0 || f)
 	{
 		free(line);
 		free(info);

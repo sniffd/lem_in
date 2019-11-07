@@ -13,6 +13,8 @@
 #include "lem_in.h"
 #include <stdio.h>
 
+int g_fl = 4;
+
 int		main(int argc, char **argv)
 {
 	parse_lem();
