@@ -96,14 +96,12 @@ t_sinfo		*parse_lem(void)
 	char	start;
 	char	end;
 	int		f;
-	int		lems;
 	int		id;
 	int		ret;
 	t_avlt	*root;
 	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
-	t_room	**graph;
 	t_rlist	*tmp;
 	t_sinfo	*info;
 
@@ -114,39 +112,55 @@ t_sinfo		*parse_lem(void)
 	ret = 1;
 	start = 0;
 	end = 0;
+	if (!(info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
+		return (NULL);
+	info->start = -1;
+	info->end = -1;
 	if (get_next_line(0, &line) <= 0)
 		return (NULL);
-	lems = atoi_lem_in(&line, &f);
-	if (*line != '\0' || lems <= 0 || f)
+	info->lems = atoi_lem_in(&line, &f);
+	if (*line != '\0' || info->lems <= 0 || f)
 	{
 		free(line);
+		free(info);
 		return (NULL);
 	}
 	info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo));
-	info->start = -1;
-	info->end = -1;
-	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
+	while (get_next_line(0, &line) > 0 && line)
 	{
-		if (ft_strchr(line, '#'))
+		if (*line == '#')
 		{
 			if (!ft_strcmp(line, "##start"))
 			{
-				if (start || end)
+				if (start || end || info->start >= 0)
 					return (NULL);
 				else
 					start = 1;
 			}
 			else if (!ft_strcmp(line, "##end"))
 			{
-				if (start || end)
+				if (start || end || info->end >= 0)
 					return (NULL);
 				else
 					end = 1;
 			}
 			continue;
 		}
-		name = ft_memalloc(ft_strchr(line, ' ') ? ft_strchr(line, ' ') - line + 1: ft_strchr(line, '#') - line + 1);
-		room = init_room(id, ft_memcpy(name, line, ft_strchr(line, ' ') - line), 0, 0);
+		link = ft_strsplit(line, ' ');
+		if (!link[0] || !link[1] || !link[2] || link[3])
+		{
+			return (NULL);
+		}
+		atoi_lem_in(&(link[1]), &f);
+		atoi_lem_in(&(link[2]), &f);
+		if (link[1][0] != '\0' || link[2][0] != '\0' || f)
+		{
+			return (NULL);
+		}
+		name = ft_memalloc(ft_strlen(link[0]) + 1);
+		room = init_room(id, ft_memcpy(name, line, ft_strlen(link[0])), 0, 0);
+		if (get_room(root, name))
+			return (NULL);
 		if (start)
 			info->start = id;
 		else if (end)
@@ -158,21 +172,23 @@ t_sinfo		*parse_lem(void)
 		end = 0;
 		id++;
 	}
-
-	printf("\n\n->Current tree content: \n");
-	post_order(root, appt); // just for test
-
-	graph = (t_room**)malloc(sizeof(t_room*) * id);
-
+	if (!(info->graph = (t_room**)ft_memalloc(sizeof(t_room*) * id)))
+	{
+		free(line);
+		free(info);
+		return (NULL);
+	}
 	while (ret && line && *line)
 	{
 		if (*line != '#')
 		{
 			link = ft_strsplit(line, '-');
+			if (!(link[1]) || link[2] || !(get_room(root, link[0]) && get_room(root, link[1])))
+				return (NULL);
 			room_one = get_room(root, link[0]);
-			graph[room_one->id] = room_one;
+			info->graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
-			graph[room_two->id] = room_two;
+			info->graph[room_two->id] = room_two;
 			if (!(room_one->lst))
 				room_one->lst = init_rlist(room_two->id);
 			else
@@ -195,13 +211,7 @@ t_sinfo		*parse_lem(void)
 		}
 		ret = get_next_line(0, &line);
 	}
-
-	printf("->Current tree content with adjacency: \n");
-	post_order(root, appt_adj); // just for test
-
-	info->graph = graph;
 	info->size = id;
-	info->lems = lems;
 	printf("all\n");
 	if (info->start == -1 || info->end == -1)
 	{
