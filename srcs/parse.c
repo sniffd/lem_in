@@ -41,6 +41,8 @@ int			atoi_lem_in(char **str, int *f)
 {
 	int			sign;
 
+	if (!ft_strcmp(*str, "-2147483648"))
+		return (-2147483648);
 	sign = 0;
 	if (**str == ' ')
 		*f = 1;
@@ -88,6 +90,41 @@ void		appt_adj(void *aa)      // for tree printing
 	ft_printf("\n");
 }
 
+void		error(void)
+{
+	ft_printf("ERROR\n");
+	exit(0);
+}
+
+void		free_arr(char **ar)
+{
+	while (*ar)
+	{
+		free(*ar);
+		ar++;
+	}
+	free(ar);
+}
+
+int			check_command(char *line, char *start, char *end, t_sinfo *info)
+{
+	if (!ft_strcmp(line, "##start"))
+	{
+		if (*start || *end || info->start >= 0)
+			error();
+		else
+			*start = 1;
+	}
+	else if (!ft_strcmp(line, "##end"))
+	{
+		if (*start || *end || info->end >= 0)
+			error();
+		else
+			*end = 1;
+	}
+	return (1);
+}
+
 t_sinfo		*parse_lem(void)
 {
 	char	*line;
@@ -121,44 +158,18 @@ t_sinfo		*parse_lem(void)
 	name = line;
 	info->lems = atoi_lem_in(&name, &f);
 	if (*name != '\0' || info->lems <= 0 || f)
-	{
-		free(line);
-		free(info);
 		return (NULL);
-	}
 	while (get_next_line(0, &line) > 0 && line && (ft_strchr(line, ' ') || ft_strchr(line, '#')))
 	{
-		if (*line == '\0')
-			return (NULL);
-		if (*line == '#')
-		{
-			if (!ft_strcmp(line, "##start"))
-			{
-				if (start || end || info->start >= 0)
-					return (NULL);
-				else
-					start = 1;
-			}
-			else if (!ft_strcmp(line, "##end"))
-			{
-				if (start || end || info->end >= 0)
-					return (NULL);
-				else
-					end = 1;
-			}
+		if (*line == '#' && check_command(line, &start, &end, info))
 			continue;
-		}
 		link = ft_strsplit(line, ' ');
-		if (!link[0] || !link[1] || !link[2] || link[3])
-		{
+		if (*line == '\0' || !link[0] || !link[1] || !link[2] || link[3])
 			return (NULL);
-		}
 		atoi_lem_in(&(link[1]), &f);
 		atoi_lem_in(&(link[2]), &f);
 		if (link[1][0] != '\0' || link[2][0] != '\0' || f)
-		{
 			return (NULL);
-		}
 		name = ft_memalloc(ft_strlen(link[0]) + 1);
 		room = init_room(id, ft_memcpy(name, line, ft_strlen(link[0])), 0, 0);
 		if (get_room(root, name))
@@ -170,16 +181,13 @@ t_sinfo		*parse_lem(void)
 		add_node(&root, room, cmp, ins);
 		free(name);
 		free(line);
+		free_arr(link);
 		start = 0;
 		end = 0;
 		id++;
 	}
 	if (!(info->graph = (t_room**)ft_memalloc(sizeof(t_room*) * id)))
-	{
-		free(line);
-		free(info);
 		return (NULL);
-	}
 	start = 0;
 	end = 0;
 	while (ret && line && *line)
@@ -219,16 +227,13 @@ t_sinfo		*parse_lem(void)
 					tmp = tmp->next;
 				tmp->next = init_rlist(room_one->id);
 			}
-			free(link);
+			free_arr(link);
 		}
 		ret = get_next_line(0, &line);
 	}
 	info->size = id;
 	ft_printf("all\n");
 	if (info->start == -1 || info->end == -1 || !(start && end))
-	{
-		free(info);
 		return (NULL);
-	}
 	return (info);
 }
