@@ -165,7 +165,6 @@ t_sinfo		*parse_lem(void)
 	t_room	*room;
 	t_room	*room_one;
 	t_room	*room_two;
-	t_rlist	*tmp;
 	t_sinfo	*info;
 
 	line = NULL;
