@@ -154,7 +154,7 @@ void		add_link(t_room *room_one, t_room *room_two)
 	}
 }
 
-void		parse_links(t_vars *vars)
+void		links_parse(t_vars *vars)
 {
 	t_room	*room_one;
 	t_room	*room_two;
@@ -174,6 +174,18 @@ void		parse_links(t_vars *vars)
 	add_link(room_one, room_two);
 	add_link(room_two, room_one);
 	free_arr(link);
+}
+
+void		parse_links(t_vars *vars)
+{
+	while (vars->f && vars->line && *(vars->line))
+	{
+		if (*(vars->line) == '\0')
+			error();
+		if (*(vars->line) != '#')
+			links_parse(vars);
+		vars->f = get_next_line(0, &(vars->line));
+	}
 }
 
 void		check_lems(t_vars *vars)
@@ -196,18 +208,8 @@ void		cycle_end(t_vars *vars)
 	vars->end = 0;
 }
 
-t_sinfo		*parse_lem(void)
+void		parse_rooms(t_vars *vars)
 {
-//	char	*line;
-	t_vars	*vars;
-
-	if (!(vars = (t_vars *)ft_memalloc(sizeof(t_vars))))
-		error();
-	if (!(vars->info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
-		error();
-	vars->info->start = -1;
-	vars->info->end = -1;
-	check_lems(vars);
 	while (get_next_line(0, &(vars->line)) > 0 && vars->line && (ft_strchr(vars->line, ' ') || ft_strchr(vars->line, '#')))
 	{
 		if (*(vars->line) == '#' && check_command(vars))
@@ -224,19 +226,26 @@ t_sinfo		*parse_lem(void)
 		cycle_end(vars);
 		(vars->id)++;
 	}
+}
+
+t_sinfo		*parse_lem(void)
+{
+	t_vars	*vars;
+
+	if (!(vars = (t_vars *)ft_memalloc(sizeof(t_vars))))
+		error();
+	if (!(vars->info = (t_sinfo *)ft_memalloc(sizeof(t_sinfo))))
+		error();
+	vars->info->start = -1;
+	vars->info->end = -1;
+	check_lems(vars);
+	parse_rooms(vars);
 	if (!(vars->info->graph = (t_room**)ft_memalloc(sizeof(t_room*) * vars->id)))
 		error();
 	vars->start = 0;
 	vars->end = 0;
 	vars->f = 1;
-	while (vars->f && vars->line && *(vars->line))
-	{
-		if (*(vars->line) == '\0')
-			error();
-		if (*(vars->line) != '#')
-			parse_links(vars);
-		vars->f = get_next_line(0, &(vars->line));
-	}
+	parse_links(vars);
 	vars->info->size = vars->id;
 	ft_printf("all\n");
 	if (vars->info->start == -1 || vars->info->end == -1 || !(vars->start && vars->end))
