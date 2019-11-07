@@ -180,6 +180,8 @@ t_sinfo		*parse_lem(void)
 		free(info);
 		return (NULL);
 	}
+	start = 0;
+	end = 0;
 	while (ret && line && *line)
 	{
 		if (*line == '\0')
@@ -193,6 +195,10 @@ t_sinfo		*parse_lem(void)
 			info->graph[room_one->id] = room_one;
 			room_two = get_room(root, link[1]);
 			info->graph[room_two->id] = room_two;
+			if (room_one->id == info->start || room_two->id == info->start)
+				start = 1;
+			if (room_one->id == info->end || room_two->id == info->end)
+				end = 1;
 			if (!(room_one->lst))
 				room_one->lst = init_rlist(room_two->id);
 			else
@@ -217,7 +223,7 @@ t_sinfo		*parse_lem(void)
 	}
 	info->size = id;
 	ft_printf("all\n");
-	if (info->start == -1 || info->end == -1)
+	if (info->start == -1 || info->end == -1 || !(start && end))
 	{
 		free(info);
 		return (NULL);
