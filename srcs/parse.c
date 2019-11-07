@@ -191,7 +191,6 @@ void		check_lems(char	**line, int *f, t_sinfo *info)
 t_sinfo		*parse_lem(void)
 {
 	char	*line;
-	char	*name;
 	char	**link;
 	char	start;
 	char	end;
@@ -217,17 +216,14 @@ t_sinfo		*parse_lem(void)
 		if (*line == '#' && check_command(line, &start, &end, info))
 			continue;
 		check_coord(line, &link, &f);
-		if (!(name = ft_memalloc(ft_strlen(link[0]) + 1)))
-			error();
-		room = init_room(id, ft_memcpy(name, line, ft_strlen(link[0])), 0, 0);
-		if (get_room(root, name))
+		room = init_room(id, link[0], 0, 0);
+		if (get_room(root, link[0]))
 			error();
 		if (start)
 			info->start = id;
 		else if (end)
 			info->end = id;
 		add_node(&root, room, cmp, ins);
-		free(name);
 		free(line);
 		free_arr(link);
 		start = 0;
