@@ -105,7 +105,7 @@ void			lem_del_tree(t_avlt **tr);
 t_room			**ft_lem_trrtoarr(t_avlt *tr, size_t s);
 void			ek_alg_neg_e(t_room *cur, t_room *par, int start);
 t_rlist  		*find_adj(t_room *cur, int id);
-int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
+int				ek_alg_del_edg(t_room **graph, t_ek_info *box, t_path_agr *paths);
 void			ft_bfs_clear_all(t_sinfo *room);
 void			find_del_adj(t_room *cur, int id);
 int				edm_karp_edgew(t_sinfo *rooms, t_ek_info *box);
