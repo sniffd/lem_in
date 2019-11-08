@@ -54,8 +54,8 @@ static void	find_paths(t_sinfo *box, t_path_agr **paths)
 void		parse_flags(int argc, char **argv)
 {
 	int	i;
-	i = 1;
 
+	i = 1;
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')

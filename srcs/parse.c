@@ -37,7 +37,7 @@ static void		print_map(t_vars *vars)
 	lem_del_tree(&(vars->root));
 }
 
-void		nul(t_vars *vars)
+void			nul(t_vars *vars)
 {
 	vars->start = 0;
 	vars->end = 0;
