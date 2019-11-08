@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:28:19 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 02:28:25 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 04:08:27 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ t_list			*ek_alg_mk_path(t_room *parent, t_list *lst, t_sinfo *rooms)
 	path_t = ft_lstnew(NULL, 0);
 	if (parent->is_in_path && parent->id != rooms->start &&
 	parent->id != rooms->end)
-	{
 		ft_lem_log("found crossing edge.\n", 4, 1, 1);
-		ft_printf("par: %s\n", parent->name);
-	}
 	parent->is_in_path = 1;
 	path_t->content = parent;
 	ft_lstadd(&lst, path_t);

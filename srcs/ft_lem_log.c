@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 15:59:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 02:58:23 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 04:26:26 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		print_paths(t_path_agr *paths)
 	t_list		*path;
 	t_path_l	*path_list;
 
-	if (g_fl > 0 && g_fl <= 3)
+	if (((g_fl & 1) == 1) || ((g_fl & 2) == 2))
 	{
 		ft_printf("\x1b[90m");
 		path_list = paths->path_l;
@@ -59,7 +59,7 @@ void		ft_lemi_log(int lvl, int clr, t_path_l *path_l)
 	extern int	g_fl;
 	int			i;
 
-	if ((g_fl == 2 || g_fl == 3))
+	if ((g_fl & 2) == 2)
 	{
 		i = -1;
 		clr == 1 ? ft_printf("\x1b[90m") : 0;
@@ -80,7 +80,7 @@ void		ft_lem_log(char *mes, int lvl, int clr, char imp)
 	extern int	g_fl;
 	int			i;
 
-	if ((imp == 0 && g_fl > 0 && g_fl <= 3) ||
+	if ((imp == 0 && ((g_fl & 2) == 2) || (g_fl & 1) == 1) ||
 	(imp == 1 && (g_fl == 2 || g_fl == 3)))
 	{
 		i = -1;

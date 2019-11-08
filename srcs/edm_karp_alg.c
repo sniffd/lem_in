@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 20:52:55 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 02:20:10 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 04:11:52 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ t_path_agr			*edm_karp_alg(t_sinfo *rooms, int *er)
 	t_path_agr	*pthagr;
 
 	pthagr = init_path_agr(0, rooms->lems, 0);
-	//while (pthagr->dx > 0)
-	while(1)
+	while (pthagr->dx > 0)
 	{
 		ft_lem_log("starting bfs...\n", 2, 2, 1);
 		ft_bfs(rooms);
@@ -72,21 +71,14 @@ t_path_agr			*edm_karp_alg(t_sinfo *rooms, int *er)
 		box = init_ek_info(rooms->graph, rooms->end, 0);
 		while (rooms->graph[box->cur]->parent != -1)
 		{
-			if (!ek_alg_del_edg(rooms->graph, box, pthagr))
+			if (!ek_alg_del_edg(rooms->graph, box))
 			{
 				if (!edm_karp_edgew(rooms, box))
 					return (NULL);
 			}
 			end_of_edm_karp(rooms, box, er);
 		}
-		if (!box->is_ed_del)
-			pthagr = ek_alg_mk_pagr(pthagr, box);
-		else
-		{
-			ft_lstdel(&(box->path), del_lst);
-			break;
-		}
-		print_paths(pthagr);//
+		pthagr = ek_alg_mk_pagr(pthagr, box);
 		free(box);
 	}
 	return (pthagr);
