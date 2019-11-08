@@ -140,9 +140,12 @@ add_executable(lem_in
 		srcs/edm_karp_mk_twin.c
 		srcs/ft_bfs.c
 		srcs/ft_bfs_clear_all.c
+		srcs/ft_lem_atoi.c
+		srcs/ft_lem_check.c
 		srcs/ft_lem_cnstrctrs.c
 		srcs/ft_lem_free.c
 		srcs/ft_lem_log.c
+		srcs/ft_lem_parse_2.c
 		srcs/ft_lem_release_antsi.c
 		srcs/ft_lem_release_antsi_serv.c
 		srcs/ft_queue.c

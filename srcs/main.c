@@ -54,8 +54,8 @@ static void	find_paths(t_sinfo *box, t_path_agr **paths)
 void		parse_flags(int argc, char **argv)
 {
 	int	i;
-	i = 1;
 
+	i = 1;
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
@@ -84,5 +84,5 @@ int			main(int argc, char **argv)
 	release_antss(box, paths);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
-	return (0);
+	exit(0);
 }
