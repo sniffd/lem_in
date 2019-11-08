@@ -45,18 +45,36 @@ void		print_info(t_room **rooms, size_t size)
 
 int g_fl = 2; // 1 - easy dg 10 - hard dg 11 - together 100 - print num
 
-int main(void)
+void	parse_flags(int argc, char **argv)
+{
+	int	i;
+	i = 1;
+	while (i < argc)
+	{
+		if (argv[i][0] == '-')
+		{
+			if (ft_strchr(argv[i], 'v'))
+				g_fl |= 2;
+			if (ft_strchr(argv[i], 'd'))
+				g_fl |= 1;
+			if (ft_strchr(argv[i], 'p'))
+				g_fl |= 4;
+		}
+		i++;
+	}
+}
+
+int main(int argc, char **argv)
 {
 	t_sinfo		*box;
 	t_path_agr	*paths;
 	int		err = 0;
 	int			stra_num = 0;
 
+	if (argc > 1)
+		parse_flags(argc, argv);
 	if (!(box = parse_lem()))
-	{
-		write(2, "ERROR\n", 6);
-		return (0);
-	}
+		error();
 	ft_lem_log("finding paths...\n", 0, 2, 0);
 	err = 1;
 	while(err)
@@ -72,15 +90,7 @@ int main(void)
 			lem_del_paths(&paths);
 	}
 	if (paths && !(paths->path_l))
-	{
-		write(2, "ERROR\n", 6);
-	}
-	//err = 0;
-	//ft_bfs_clear_all(box);
-	//ft_lem_log("starting edm_karp...\n", 1, 2, 1);
-	//paths = edm_karp_alg(box, &err);
-	//ft_lem_log("finish edm_karp.\n", 1, 2, 1);
-	//print_paths(paths);
+		error();
 	if (paths && paths->path_l)
 	{
 		ft_lem_log("releasing ants...\n", 3, 2, 1);

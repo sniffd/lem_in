@@ -115,6 +115,6 @@ void			ft_lem_log(char *mes, int lvl, int clr, char imp);
 void			ft_lemi_log(int lvl, int clr, t_path_l *path_l);
 void			print_paths(t_path_agr *paths);
 void			print_lems(int str_num);
-
+void			error(void);
 
 #endif

@@ -131,7 +131,8 @@ int			check_command(t_vars *vars)
 void		check_coord(char *line, char ***link, int *f)
 {
 	*link = ft_strsplit(line, ' ');
-	if (*line == '\0' || !(*link)[0] || !(*link)[1] || !(*link)[2] || (*link)[3])
+	if (*line == '\0' || !(*link)[0] || !(*link)[1] || !(*link)[2] ||
+	(*link)[3])
 		error();
 	atoi_lem_in(&((*link)[1]), f);
 	atoi_lem_in(&((*link)[2]), f);
@@ -161,7 +162,8 @@ void		links_parse(t_vars *vars)
 	char	**link;
 
 	link = ft_strsplit(vars->line, '-');
-	if (!(link[1]) || link[2] || !(get_room(vars->root, link[0]) && get_room(vars->root, link[1])) || link[0] == link[1])
+	if (!(link[1]) || link[2] || !(get_room(vars->root, link[0]) &&
+	get_room(vars->root, link[1])) || link[0] == link[1])
 		error();
 	room_one = get_room(vars->root, link[0]);
 	vars->info->graph[room_one->id] = room_one;
@@ -218,7 +220,8 @@ void		cycle_end(t_vars *vars)
 
 void		parse_rooms(t_vars *vars)
 {
-	while (get_next_line(0, &(vars->line)) > 0 && vars->line && (ft_strchr(vars->line, ' ') || ft_strchr(vars->line, '#')))
+	while (get_next_line(0, &(vars->line)) > 0 && vars->line &&
+	(ft_strchr(vars->line, ' ') || ft_strchr(vars->line, '#')))
 	{
 		if (!(vars->last->next = (t_list *)ft_memalloc(sizeof(t_list))))
 			error();
@@ -272,7 +275,8 @@ t_sinfo		*parse_lem(void)
 	vars->info->end = -1;
 	check_lems(vars);
 	parse_rooms(vars);
-	if (!(vars->info->graph = (t_room**)ft_memalloc(sizeof(t_room*) * vars->id)))
+	if (!(vars->info->graph =
+		(t_room**)ft_memalloc(sizeof(t_room*) * vars->id)))
 		error();
 	vars->start = 0;
 	vars->end = 0;
@@ -281,7 +285,8 @@ t_sinfo		*parse_lem(void)
 	vars->info->size = vars->id;
 	post_order(vars->root, appt_adj);
 	ft_printf("all\n");
-	if (vars->info->start == -1 || vars->info->end == -1 || !(vars->start && vars->end))
+	if (vars->info->start == -1 || vars->info->end == -1 ||
+	!(vars->start && vars->end))
 		error();
 	print_map(vars);
 	return (vars->info);

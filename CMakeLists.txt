@@ -148,4 +148,4 @@ add_executable(lem_in
 		srcs/ft_queue.c
 		srcs/parse.c
 		srcs/qnode_services.c
-		tests/main.c)
+		srcs/test_with_parse.c)
