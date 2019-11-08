@@ -180,6 +180,11 @@ void		parse_links(t_vars *vars)
 {
 	while (vars->f && vars->line && *(vars->line))
 	{
+		if (!(vars->last->next = (t_list *)ft_memalloc(sizeof(t_list))))
+			error();
+		vars->last->next->content_size = vars->last->content_size;
+		vars->last = vars->last->next;
+		vars->last->content = vars->line;
 		if (*(vars->line) == '\0')
 			error();
 		if (*(vars->line) != '#')
@@ -195,6 +200,10 @@ void		check_lems(t_vars *vars)
 	if (get_next_line(0, &(vars->line)) <= 0)
 		error();
 	str = vars->line;
+	if (!(vars->last = (t_list *)ft_memalloc(sizeof(t_list))))
+		error();
+	vars->last->content = vars->line;
+	vars->last->content_size = (size_t)vars->last;
 	vars->info->lems = atoi_lem_in(&str, &(vars->f));
 	if (*str != '\0' || vars->info->lems <= 0 || vars->f)
 		error();
@@ -202,7 +211,6 @@ void		check_lems(t_vars *vars)
 
 void		cycle_end(t_vars *vars)
 {
-	free(vars->line);
 	free_arr(vars->link);
 	vars->start = 0;
 	vars->end = 0;
@@ -212,6 +220,11 @@ void		parse_rooms(t_vars *vars)
 {
 	while (get_next_line(0, &(vars->line)) > 0 && vars->line && (ft_strchr(vars->line, ' ') || ft_strchr(vars->line, '#')))
 	{
+		if (!(vars->last->next = (t_list *)ft_memalloc(sizeof(t_list))))
+			error();
+		vars->last->next->content_size = vars->last->content_size;
+		vars->last = vars->last->next;
+		vars->last->content = vars->line;
 		if (*(vars->line) == '#' && check_command(vars))
 			continue;
 		check_coord(vars->line, &(vars->link), &(vars->f));
@@ -226,6 +239,25 @@ void		parse_rooms(t_vars *vars)
 		cycle_end(vars);
 		(vars->id)++;
 	}
+}
+
+void		print_map(t_vars *vars)
+{
+	t_list	*lst;
+	t_list	*tmp;
+
+	lst = (t_list *)vars->last->content_size;
+	while (lst != vars->last)
+	{
+		ft_putendl(lst->content);
+		tmp = lst;
+		lst = lst->next;
+		free(tmp->content);
+		free(tmp);
+	}
+	ft_putendl(lst->content);
+	free(lst->content);
+	free(lst);
 }
 
 t_sinfo		*parse_lem(void)
@@ -250,5 +282,6 @@ t_sinfo		*parse_lem(void)
 	ft_printf("all\n");
 	if (vars->info->start == -1 || vars->info->end == -1 || !(vars->start && vars->end))
 		error();
+	print_map(vars);
 	return (vars->info);
 }

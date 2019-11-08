@@ -72,6 +72,7 @@ typedef	struct	s_vars
 	t_avlt	*root;
 	t_room	*room;
 	t_sinfo	*info;
+	t_list	*last;
 }				t_vars;
 
 t_room			*init_room(int id, char *name, int x, int y);
