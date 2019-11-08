@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdaryn-h <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 05:24:00 by fdaryn-h          #+#    #+#             */
-/*   Updated: 2019/02/04 12:32:24 by fdaryn-h         ###   ########.fr       */
+/*   Updated: 2019/11/08 06:40:29 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	ft_floop(char const *s, char c, int i, int *n)
 				i++;
 			(*(n))++;
 		}
-		i++;
+		if (s[i])
+			i++;
 	}
 }
 
