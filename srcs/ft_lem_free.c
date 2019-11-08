@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:19:03 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/07 21:18:03 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 07:23:00 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,11 @@ void	lem_del_rooms(t_room ***graph, size_t s)
 
 void	lem_del_tree(t_avlt **tr)
 {
-	// free alone vertex!
 	if (!tr || !(*tr))
 		return ;
 	lem_del_tree(&((*tr)->left));
 	lem_del_tree(&((*tr)->right));
-	if(!(((t_room*)(*tr)->item)->lst))
+	if (!(((t_room*)(*tr)->item)->lst))
 	{
 		free(((t_room*)(*tr)->item)->name);
 		free((t_room*)(*tr)->item);

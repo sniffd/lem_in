@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:52:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/28 13:01:44 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 07:24:11 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ void *(*inp)(void *));
 void			del_qnode(t_fque **head);
 void			free_qnode(t_fque **head);
 void			print_qnode(t_fque *head, void (*f)(void *));
-
 
 #endif

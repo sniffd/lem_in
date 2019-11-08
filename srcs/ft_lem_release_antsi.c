@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 15:38:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/07 18:40:11 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 07:27:18 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int		calc_cap(t_path_agr *paths, t_path_l *path_l)
 {
 	int		val;
 
-	val = (paths->L + paths->ants) / paths->pths - path_l->len;
-	if (((paths->L + paths->ants) % paths->pths) != 0)
+	val = (paths->len + paths->ants) / paths->pths - path_l->len;
+	if (((paths->len + paths->ants) % paths->pths) != 0)
 		val++;
 	return (val);
 }

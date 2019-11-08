@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/08 07:24:24 by gbrandon          #+#    #+#             */
+/*   Updated: 2019/11/08 07:27:59 by gbrandon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_LEM_IN_H
 # define LEM_IN_LEM_IN_H
 # include "libft.h"
@@ -10,19 +22,19 @@ typedef struct	s_rlist
 	int				flow;
 	int				cap;
 	void			*twin;
-	struct	s_rlist	*next;
+	struct s_rlist	*next;
 }				t_rlist;
 
 typedef struct	s_room
 {
 	int				id;
 	char			*name;
-	char 			mark;
+	char			mark;
 	int				parent;
 	int				x;
 	int				y;
 	int				is_in_path;
-	struct	s_rlist	*lst;
+	struct s_rlist	*lst;
 }				t_room;
 
 typedef struct	s_path_l
@@ -36,7 +48,7 @@ typedef struct	s_path_l
 
 typedef struct	s_path_agr
 {
-	size_t			L;
+	size_t			len;
 	size_t			ants;
 	size_t			pths;
 	int				dx;
@@ -87,8 +99,9 @@ void			*q_input(void *it);
 int				ft_bfs(t_sinfo *rooms);
 t_path_agr		*edm_karp_alg(t_sinfo *rooms, int *e);
 void			ek_alg_mk_twin(t_room *room, int start);
-t_list			*ek_alg_mk_path(t_room *parent,  t_list *lst, t_sinfo *rooms);
-t_path_l		*ek_alg_mk_path_l(t_path_l *path_l, t_list *path, size_t length);
+t_list			*ek_alg_mk_path(t_room *parent, t_list *lst, t_sinfo *rooms);
+t_path_l		*ek_alg_mk_path_l(t_path_l *path_l, t_list *path,
+size_t length);
 t_path_agr		*ek_alg_mk_pagr(t_path_agr *pagr, t_ek_info *box);
 void			del_lst(void *it, size_t s);
 int				release_antsi(t_path_agr *paths, int end, int *stra_num);
@@ -106,7 +119,7 @@ void			lem_del_rooms(t_room ***graph, size_t s);
 void			lem_del_tree(t_avlt **tr);
 t_room			**ft_lem_trrtoarr(t_avlt *tr, size_t s);
 void			ek_alg_neg_e(t_room *cur, t_room *par, int start);
-t_rlist  		*find_adj(t_room *cur, int id);
+t_rlist			*find_adj(t_room *cur, int id);
 int				ek_alg_del_edg(t_room **graph, t_ek_info *box);
 void			ft_bfs_clear_all(t_sinfo *room);
 void			find_del_adj(t_room *cur, int id);
