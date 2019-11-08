@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 05:24:00 by fdaryn-h          #+#    #+#             */
-/*   Updated: 2019/11/08 07:20:51 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 07:48:30 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char			*fill_word(char **s, char c)
 		(*s)++;
 	tail_word = *s;
 	*s = head_word;
-	word = (char *) malloc(tail_word - head_word + 1);
+	word = (char *)malloc(tail_word - head_word + 1);
 	if (!word)
 		return (NULL);
 	head_word = word;
@@ -41,6 +41,7 @@ static char			*fill_word(char **s, char c)
 static size_t		word_count(char const *s, char c)
 {
 	size_t		counter;
+
 	counter = 0;
 	if (*s && (*s != c))
 		counter++;
@@ -56,6 +57,7 @@ static size_t		word_count(char const *s, char c)
 static	void		free_ar(char **tab, size_t count)
 {
 	size_t		i;
+
 	i = 0;
 	while (i < count)
 	{
@@ -69,6 +71,7 @@ static char			**main_split(char c, char **tab, char **fast_str,
 									size_t *al_words)
 {
 	char	**head_tab;
+
 	head_tab = tab;
 	if (**fast_str && (**fast_str != c))
 	{
@@ -93,6 +96,7 @@ char				**ft_strsplit(char const *s, char c)
 	char	**tab;
 	char	**fast_str;
 	size_t	w_c;
+
 	w_c = 0;
 	if (!s)
 		return (NULL);
