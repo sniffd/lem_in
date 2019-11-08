@@ -6,12 +6,25 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 15:59:10 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 04:26:26 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 04:59:46 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "ft_printf.h"
+#include "avlt.h"
+
+void		print_tree(t_avlt *root)
+{
+	extern int	g_fl;
+
+	if ((g_fl & 2) == 2)
+	{
+		ft_printf("\x1b[90m");
+		post_order(root, appt_adj);
+		ft_printf("\x1b[90m");
+	}
+}
 
 void		print_lems(int str_num)
 {
@@ -80,8 +93,8 @@ void		ft_lem_log(char *mes, int lvl, int clr, char imp)
 	extern int	g_fl;
 	int			i;
 
-	if ((imp == 0 && ((g_fl & 2) == 2) || (g_fl & 1) == 1) ||
-	(imp == 1 && (g_fl == 2 || g_fl == 3)))
+	if ((imp == 0 && ((g_fl & 1) == 1)) ||
+	(imp == 1 && ((g_fl & 2) == 2)))
 	{
 		i = -1;
 		clr == 1 ? ft_printf("\x1b[90m") : 0;

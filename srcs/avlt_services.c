@@ -6,13 +6,14 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:25:05 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/10/30 17:52:27 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 05:07:02 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "avlt.h"
 #include "lem_in.h"
+#include "ft_printf.h"
 
 void	*ins(void *ins)
 {
@@ -48,4 +49,23 @@ t_room	*get_room_id(t_avlt *tr, int id)
 	else if (id > ((t_room*)tr->item)->id)
 		return (get_room_id(tr->right, id));
 	return (NULL);
+}
+
+void		appt_adj(void *aa)
+{
+	t_room 	*a;
+	t_rlist	*adj;
+
+	a = aa;
+	adj = a->lst;
+	ft_printf("->node: %s", a->name);
+	ft_printf("-->list: ");
+	while (adj)
+	{
+		ft_printf("%d", adj->id);
+		if (adj->next)
+			ft_printf(" ");
+		adj = adj->next;
+	}
+	ft_printf("\n");
 }

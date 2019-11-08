@@ -116,5 +116,14 @@ void			ft_lemi_log(int lvl, int clr, t_path_l *path_l);
 void			print_paths(t_path_agr *paths);
 void			print_lems(int str_num);
 void			error(void);
+void			parse_rooms(t_vars *vars);
+void			parse_links(t_vars *vars);
+int				atoi_lem_in(char **str, int *f);
+int				check_command(t_vars *vars);
+void			check_coord(char *line, char ***link, int *f);
+void			check_lems(t_vars *vars);
+void			free_arr(char **ar);
+void			appt_adj(void *aa);
+void			print_tree(t_avlt *root);
 
 #endif
