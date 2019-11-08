@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 14:54:54 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 04:39:10 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 05:21:04 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	dec_flow(t_room *room, int connect)
 	return (0);
 }
 
-int		edm_karp_edgew(t_sinfo *rooms, t_ek_info *box)
+int			edm_karp_edgew(t_sinfo *rooms, t_ek_info *box)
 {
 	if (inc_flow(box->par, box->cur) < 0)
 		return (0);

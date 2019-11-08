@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:25:05 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 05:07:02 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 05:24:15 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_room	*get_room_id(t_avlt *tr, int id)
 	return (NULL);
 }
 
-void		appt_adj(void *aa)
+void	appt_adj(void *aa)
 {
-	t_room 	*a;
+	t_room	*a;
 	t_rlist	*adj;
 
 	a = aa;
