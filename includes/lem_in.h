@@ -41,6 +41,7 @@ typedef struct	s_path_agr
 	size_t			pths;
 	int				dx;
 	t_path_l		*path_l;
+	t_path_l		*temp_path;
 }				t_path_agr;
 
 typedef struct	s_ek_info

@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 13:10:28 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/04 14:08:34 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 03:17:58 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_path_agr	*init_path_agr(int l, int n, int k)
 	pathagr->ants = n;
 	pathagr->dx = 2147483647;
 	pathagr->path_l = NULL;
+	pathagr->temp_path = NULL;
 	return (pathagr);
 }
 

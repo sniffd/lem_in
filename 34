@@ -5604,6 +5604,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Scv1
+!!size: 39
 edge: N_w3->Scv1
 [90m----->found crossing edge.
 [0mpar: N_w3
@@ -5744,18 +5745,23 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Sog8
+!!size: 52
 edge: Ovj1->Sog8
 [90m----->found crossing edge.
 [0mpar: Ovj1
+!!size: 52
 edge: Hyl1->Ovj1
 [90m----->found crossing edge.
 [0mpar: Hyl1
+!!size: 52
 edge: Mxu6->Hyl1
 [90m----->found crossing edge.
 [0mpar: Mxu6
+!!size: 52
 edge: Gx_7->Mxu6
 [90m----->found crossing edge.
 [0mpar: Gx_7
+!!size: 52
 edge: N_w3->Gx_7
 [90m----->found crossing edge.
 [0mpar: N_w3
@@ -5965,21 +5971,27 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Gue0
+!!size: 41
 edge: Wvj2->Gue0
 [90m----->found crossing edge.
 [0mpar: Wvj2
+!!size: 41
 edge: Srr3->Wvj2
 [90m----->found crossing edge.
 [0mpar: Srr3
+!!size: 41
 edge: Kcr7->Srr3
 [90m----->found crossing edge.
 [0mpar: Kcr7
+!!size: 41
 edge: Uvn3->Kcr7
 [90m----->found crossing edge.
 [0mpar: Uvn3
+!!size: 41
 edge: T_q9->Uvn3
 [90m----->found crossing edge.
 [0mpar: T_q9
+!!size: 41
 edge: Zqg5->T_q9
 [90m----->found crossing edge.
 [0mpar: Zqg5
@@ -6278,6 +6290,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Edb9
+!!size: 29
 edge: Rtg0->Edb9
 [90m----->found crossing edge.
 [0mpar: Rtg0
@@ -6702,21 +6715,27 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Xrw5
+!!size: 47
 edge: Xzr6->Xrw5
 [90m----->found crossing edge.
 [0mpar: Xzr6
+!!size: 47
 edge: Tni9->Xzr6
 [90m----->found crossing edge.
 [0mpar: Tni9
+!!size: 47
 edge: Caj3->Tni9
 [90m----->found crossing edge.
 [0mpar: Caj3
+!!size: 47
 edge: Yyx1->Caj3
 [90m----->found crossing edge.
 [0mpar: Yyx1
+!!size: 47
 edge: Ars1->Yyx1
 [90m----->found crossing edge.
 [0mpar: Ars1
+!!size: 47
 edge: Bvy4->Ars1
 [90m----->found crossing edge.
 [0mpar: Bvy4
@@ -7155,6 +7174,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Fxd8
+!!size: 67
 edge: Dos9->Fxd8
 [90m----->found crossing edge.
 [0mpar: Dos9
@@ -8832,6 +8852,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Bvy4
+!!size: 62
 edge: Gxe6->Bvy4
 [90m----->found crossing edge.
 [0mpar: Gxe6
@@ -10454,6 +10475,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Gij1
+!!size: 70
 edge: Tss7->Gij1
 [90m----->found crossing edge.
 [0mpar: Tss7
@@ -13225,6 +13247,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Xrw5
+!!size: 71
 edge: Fxd8->Xrw5
 [90m----->found crossing edge.
 [0mpar: Fxd8
@@ -23634,6 +23657,7 @@ Uyc5->Iqx1->Npj0->Zbz3->Ort4->E_g2->Pto5->Hcc2->Jlu0->Mxg2->Nnl7->Yzg1->Dv_7->Wd
 [0m[94m--->finish bfs.
 [0m[90m----->found crossing edge.
 [0mpar: Wzp5
+!!size: 43
 edge: Nig3->Wzp5
 [90m----->found crossing edge.
 [0mpar: Nig3

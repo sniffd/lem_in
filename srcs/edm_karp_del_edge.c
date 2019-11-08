@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:43:57 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 02:19:08 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 03:13:58 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		del_path(t_ek_info *box, t_path_agr *paths)
 		l = p->path;
 		while(l->next)
 		{
-			if ((((t_room*)l->next->content)->id == box->cur) && ((t_room*)l->content)->id == box->par->id)
+			if ((((t_room*)l->content)->id == box->cur) && ((t_room*)l->next->content)->id == box->par->id)
 				ft_printf("!!size: %d\n", p->len);
 			l = l->next;
 		}
