@@ -6,7 +6,7 @@
 /*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 07:23:12 by gbrandon          #+#    #+#             */
-/*   Updated: 2019/11/08 07:23:13 by gbrandon         ###   ########.fr       */
+/*   Updated: 2019/11/08 07:55:24 by gbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		print_map(t_vars *vars)
 		free(tmp);
 	}
 	ft_putendl(lst->content);
+	ft_printf("\n");
 	free(lst->content);
 	free(lst);
 	print_tree(vars->root);
@@ -75,7 +76,6 @@ t_sinfo			*parse_lem(void)
 	nul(vars);
 	parse_links(vars);
 	vars->info->size = vars->id;
-	ft_printf("\n\n");
 	if (vars->info->start == -1 || vars->info->end == -1 ||
 	!(vars->start && vars->end))
 		error();
