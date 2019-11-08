@@ -22,13 +22,19 @@ int			check_command(t_vars *vars)
 
 void		check_coord(char *line, char ***link, int *f)
 {
+	char *str;
+
 	*link = ft_strsplit(line, ' ');
 	if (*line == '\0' || !(*link)[0] || !(*link)[1] || !(*link)[2] ||
 	(*link)[3])
 		error();
-	atoi_lem_in(&((*link)[1]), f);
-	atoi_lem_in(&((*link)[2]), f);
-	if ((*link)[1][0] != '\0' || (*link)[2][0] != '\0' || *f)
+	str = (*link)[1];
+	atoi_lem_in(&str, f);
+	if (*str != '\0' || *f)
+		error();
+	str = (*link)[2];
+	atoi_lem_in(&str, f);
+	if (*str != '\0' || *f)
 		error();
 }
 

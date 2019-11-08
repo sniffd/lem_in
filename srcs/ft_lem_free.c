@@ -87,6 +87,12 @@ void	lem_del_tree(t_avlt **tr)
 		return ;
 	lem_del_tree(&((*tr)->left));
 	lem_del_tree(&((*tr)->right));
+	if(!(((t_room*)(*tr)->item)->lst))
+	{
+		free(((t_room*)(*tr)->item)->name);
+		free((t_room*)(*tr)->item);
+		(*tr)->item = NULL;
+	}
 	free(*tr);
 	*tr = NULL;
 }

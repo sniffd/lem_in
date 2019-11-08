@@ -71,5 +71,5 @@ int 		main(int argc, char **argv)
 	release_antss(box, paths);
 	lem_del_paths(&paths);
 	lem_del_rooms(&(box->graph), box->size);
-	return (0);
+	exit(0);
 }

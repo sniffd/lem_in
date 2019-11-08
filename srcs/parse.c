@@ -32,11 +32,21 @@ static void		print_map(t_vars *vars)
 	ft_putendl(lst->content);
 	free(lst->content);
 	free(lst);
+	print_tree(vars->root);
+	lem_del_tree(&(vars->root));
+}
+
+void		nul(t_vars *vars)
+{
+	vars->start = 0;
+	vars->end = 0;
+	vars->f = 1;
 }
 
 t_sinfo		*parse_lem(void)
 {
 	t_vars	*vars;
+	t_sinfo	*res;
 
 	if (!(vars = (t_vars *)ft_memalloc(sizeof(t_vars))))
 		error();
@@ -49,17 +59,15 @@ t_sinfo		*parse_lem(void)
 	if (!(vars->info->graph =
 		(t_room**)ft_memalloc(sizeof(t_room*) * vars->id)))
 		error();
-	vars->start = 0;
-	vars->end = 0;
-	vars->f = 1;
+	nul(vars);
 	parse_links(vars);
 	vars->info->size = vars->id;
-	post_order(vars->root, appt_adj);
 	ft_printf("all\n");
 	if (vars->info->start == -1 || vars->info->end == -1 ||
 	!(vars->start && vars->end))
 		error();
 	print_map(vars);
-	print_tree(vars->root);
-	return (vars->info);
+	res = vars->info;
+	free(vars);
+	return (res);
 }
