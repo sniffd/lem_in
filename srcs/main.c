@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbrandon <gbrandon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/08 05:22:16 by gbrandon          #+#    #+#             */
+/*   Updated: 2019/11/08 05:24:47 by gbrandon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "lem_in.h"
@@ -23,7 +35,7 @@ static void	find_paths(t_sinfo *box, t_path_agr **paths)
 
 	ft_lem_log("finding paths...\n", 0, 2, 0);
 	err = 1;
-	while(err)
+	while (err)
 	{
 		err = 0;
 		ft_bfs_clear_all(box);
@@ -43,6 +55,7 @@ void		parse_flags(int argc, char **argv)
 {
 	int	i;
 	i = 1;
+
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
@@ -58,7 +71,7 @@ void		parse_flags(int argc, char **argv)
 	}
 }
 
-int 		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_sinfo		*box;
 	t_path_agr	*paths;

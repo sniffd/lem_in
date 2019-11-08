@@ -1,8 +1,9 @@
 #include "lem_in.h"
 #include "ft_printf.h"
+
 extern	int	g_lf;
 
-void		free_arr(char **ar)
+void			free_arr(char **ar)
 {
 	char	**tmp;
 
@@ -43,7 +44,7 @@ void		nul(t_vars *vars)
 	vars->f = 1;
 }
 
-t_sinfo		*parse_lem(void)
+t_sinfo			*parse_lem(void)
 {
 	t_vars	*vars;
 	t_sinfo	*res;
@@ -62,7 +63,7 @@ t_sinfo		*parse_lem(void)
 	nul(vars);
 	parse_links(vars);
 	vars->info->size = vars->id;
-	ft_printf("all\n");
+	ft_printf("\n\n");
 	if (vars->info->start == -1 || vars->info->end == -1 ||
 	!(vars->start && vars->end))
 		error();
